@@ -1,5 +1,5 @@
 /**
- * TypeScript interfaces for About section components
+ * Type definitions for About section components
  */
 
 export interface AboutCardData {
@@ -10,13 +10,9 @@ export interface AboutCardData {
     imageAlt: string;
     gradientFrom: string;
     gradientTo: string;
-    imagePosition: 'left' | 'right';
+    imagePosition?: 'left' | 'right';
 }
 
 export interface AboutCardProps {
     data: AboutCardData;
-}
-
-export interface AboutSectionProps {
-    // Future props can be added here
 }
