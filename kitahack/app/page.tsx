@@ -1,5 +1,7 @@
 import HeroSection from './components/Hero/HeroSection';
 import AboutSection from './components/About/AboutSection';
+import Sponsors from './components/Partners/Sponsors';
+import Organizers from './components/Partners/Organizers';
 
 export default function Home() {
   return (
@@ -94,6 +96,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Sponsors />
+      <Organizers />
     </main>
   );
 }
