@@ -1,8 +1,14 @@
 "use client";
 
 import React from 'react';
-import CountdownTimer from './CountdownTimer';
+import dynamic from "next/dynamic";
 import { Button } from '@/components/ui/button';
+
+// Dynamically import the client-only CountdownTimer
+const CountdownTimerClient = dynamic(
+  () => import("./CountdownTimer.client"),
+  { ssr: false } // prevent server side render 
+);
 
 /**
  * HeroSection Component
@@ -54,7 +60,7 @@ const HeroSection: React.FC = () => {
 
                     {/* Countdown Timer */}
                     <div className="py-4 md:py-8">
-                        <CountdownTimer targetDate={targetDate} />
+                        <CountdownTimerClient targetDate={targetDate} />
                     </div>
 
                     {/* CTA Button */}
