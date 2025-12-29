@@ -62,20 +62,20 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
     }, [targetDate]);
 
     return (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
             {/* Label */}
-            <p className="text-base md:text-lg text-gray-400 uppercase tracking-widest font-semibold">
+            <p className="text-xs md:text-lg text-gray-400 uppercase tracking-widest font-semibold">
                 Registration Closes In
             </p>
 
             {/* Countdown Display with Colons */}
-            <div className="flex gap-2 md:gap-3 justify-center items-center">
+            <div className="flex gap-1.5 md:gap-3 justify-center items-center">
                 <CountdownDisplay value={timeRemaining.days} label="Days" />
-                <span className="text-3xl md:text-5xl font-bold text-white/50">:</span>
+                <span className="text-2xl md:text-5xl font-bold text-white/50">:</span>
                 <CountdownDisplay value={timeRemaining.hours} label="Hours" />
-                <span className="text-3xl md:text-5xl font-bold text-white/50">:</span>
+                <span className="text-2xl md:text-5xl font-bold text-white/50">:</span>
                 <CountdownDisplay value={timeRemaining.minutes} label="Minutes" />
-                <span className="text-3xl md:text-5xl font-bold text-white/50">:</span>
+                <span className="text-2xl md:text-5xl font-bold text-white/50">:</span>
                 <CountdownDisplay value={timeRemaining.seconds} label="Seconds" />
             </div>
         </div>
