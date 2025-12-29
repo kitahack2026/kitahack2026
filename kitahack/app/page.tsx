@@ -2,12 +2,14 @@ import HeroSection from './components/Hero/HeroSection';
 import AboutSection from './components/About/AboutSection';
 import Sponsors from './components/Partners/Sponsors';
 import Organizers from './components/Partners/Organizers';
+import Timeline from './components/Timeline';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-white">
       <HeroSection />
       <AboutSection />
+      <Timeline />
 
       {/* Judging Section */}
       <section id="judging" className="max-w-5xl mx-auto p-8 py-20">
