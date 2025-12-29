@@ -45,4 +45,5 @@ function Sponsors() {
 }
 
 // change below line to export Sponsors when we found sponsors
-export default Sponsors;
+// else just leave it as CallingForSponsors
+export default CallingForSponsors;
