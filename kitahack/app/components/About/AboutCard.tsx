@@ -37,7 +37,7 @@ const AboutCard: React.FC<AboutCardProps> = ({ data }) => {
                             alt={imageAlt}
                             fill
                             className={
-                                isLogoCard ? "object-contain p-8" :
+                                isLogoCard ? "object-contain" :
                                     isSDGCard ? "object-contain p-6" :
                                         "object-cover"
                             }
