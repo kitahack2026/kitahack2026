@@ -65,7 +65,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
         <div className="flex flex-col items-center gap-4">
             {/* Label */}
             <p className="text-base md:text-lg text-gray-400 uppercase tracking-widest font-semibold">
-                Registration Opens In
+                Registration Closes In
             </p>
 
             {/* Countdown Display with Colons */}

@@ -10,8 +10,8 @@ import { Button } from '@/components/ui/button';
  * Follows the Figma design with dark theme and gradient effects
  */
 const HeroSection: React.FC = () => {
-    // Target date: January 4th, 2026, 12:00 AM MYT
-    const targetDate = new Date('2026-01-04T00:00:00+08:00');
+    // Target date: January 18th, 2026, 11:59 PM MYT (Registration Closes)
+    const targetDate = new Date('2026-01-18T23:59:59+08:00');
 
     const handleLearnMore = () => {
         const aboutSection = document.getElementById('about');
