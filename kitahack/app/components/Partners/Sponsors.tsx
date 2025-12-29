@@ -1,5 +1,4 @@
 import CustomMarquee from "./CustomMarquee";
-import {Button} from "@/components/ui/button";
 
 // next is not sponsoring lol, just a placeholder logo for now
 const sponsors = [
@@ -13,6 +12,9 @@ const sponsors = [
 
 function CallingForSponsors() {
     return (
+        <div className="relative z-10 max-w-5xl mx-auto w-full">
+        <div className="absolute -inset-[1px] rounded-[3rem] bg-gradient-to-r from-[#3B84F7] via-[#47AD7A] via-[#CB5C6D] to-[#D1AC34] opacity-90 blur-3xl" />
+        <div className="relative text-center space-y-6 md:space-y-8 p-6 md:p-12 rounded-[3rem] border border-white bg-black isolate">
         <section className="py-10 px-10">
             <h1 className="text-4xl font-bold mb-10 text-center text-blue-500">Calling for Sponsors</h1>
             <div className="max-w-5xl mx-auto bg-gray-800/50 p-10 rounded-xl border border-gray-700 text-center">
@@ -29,6 +31,8 @@ function CallingForSponsors() {
                 </a>
             </div>
         </section>
+        </div>
+        </div>
     )
 }
 

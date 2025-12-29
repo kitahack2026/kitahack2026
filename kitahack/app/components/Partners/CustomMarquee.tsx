@@ -13,7 +13,7 @@ interface MarqueeProps {
 
 function CustomMarquee({ header, srcFolder, reverse, partnerList, duration }: MarqueeProps) {
   return (
-    <section className="py-10">
+    <section className="py-15">
       <h1 className="text-4xl font-bold mb-10 text-center text-blue-500">{header}</h1>
       <div className="bg-gray-300 py-5 mx-10 lg:mx-10 xl:mx-40 2xl:mx-60 rounded-2xl">
         <Marquee
