@@ -2,8 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float } from '@react-three/drei';
+
 
 // --- CUSTOM COLORS ---
 const colors = {
@@ -31,60 +30,11 @@ const events = [
   { title: "Demo Day", date: "29th Mar 2026", type: "Grand Finale", location: "Auditorium", color: colors.red },
 ];
 
-// --- 3D FLOATING OBJECT ---
-function GoogleAtom({ scrollProgress }) {
-  const groupRef = useRef(null);
-  
-  useFrame(({ clock }) => {
-    if (!groupRef.current) return;
-    const currentScroll = scrollProgress.get();
-    const t = clock.getElapsedTime();
-    
-    // Rotate the whole system based on scroll
-    groupRef.current.rotation.z = currentScroll * Math.PI;
-    groupRef.current.rotation.y = t * 0.2;
-  });
 
-  return (
-    <Float speed={3} rotationIntensity={1} floatIntensity={1}>
-      <group ref={groupRef} scale={1.3} position={[0, -1, 0]}>
-        {/* Core */}
-        <mesh>
-          <sphereGeometry args={[0.3, 32, 32]} />
-          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={2} />
-        </mesh>
-
-        {/* Ring 1 - Blue */}
-        <mesh rotation={[1, 0.5, 0]}>
-          <torusGeometry args={[1.2, 0.02, 16, 100]} />
-          <meshStandardMaterial color="#3b84f7" emissive="#3b84f7" emissiveIntensity={1} />
-        </mesh>
-
-        {/* Ring 2 - Red */}
-        <mesh rotation={[2, 2, 0]}>
-          <torusGeometry args={[1.1, 0.02, 16, 100]} />
-          <meshStandardMaterial color="#cb5c6d" emissive="#cb5c6d" emissiveIntensity={1} />
-        </mesh>
-
-        {/* Ring 3 - Yellow */}
-        <mesh rotation={[0, 1, 1]}>
-          <torusGeometry args={[1.3, 0.02, 16, 100]} />
-          <meshStandardMaterial color="#d1ac34" emissive="#d1ac34" emissiveIntensity={1} />
-        </mesh>
-         
-         {/* Ring 4 - Green */}
-        <mesh rotation={[3, 0, 1]}>
-          <torusGeometry args={[1.15, 0.02, 16, 100]} />
-          <meshStandardMaterial color="#47ad7a" emissive="#47ad7a" emissiveIntensity={1} />
-        </mesh>
-      </group>
-    </Float>
-  );
-}
 
 export default function Timeline() {
-  const targetRef = useRef(null);
-  const containerRef = useRef(null);
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [scrollRange, setScrollRange] = useState(0);
 
   useEffect(() => {
@@ -127,13 +77,26 @@ export default function Timeline() {
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
         </div>
 
-        {/* --- 3D CANVAS --- */}
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          <Canvas gl={{ antialias: true, alpha: true }}>
-            <ambientLight intensity={0.5} />
-            <GoogleAtom scrollProgress={scrollYProgress} />
-            <Environment preset="city" />
-          </Canvas>
+        {/* --- ANIMATED SVG (Google Atom Replacement) --- */}
+        <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
+          <motion.svg
+            width="320" height="320" viewBox="0 0 320 320"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 16, ease: "linear" }}
+            style={{ filter: 'drop-shadow(0 0 32px #3b84f7aa)' }}
+          >
+            {/* Core */}
+            <circle cx="160" cy="160" r="38" fill="#fff" fillOpacity="0.95" />
+            {/* Blue ring */}
+            <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#3b84f7" strokeWidth="6" />
+            {/* Red ring */}
+            <ellipse cx="160" cy="160" rx="90" ry="38" fill="none" stroke="#cb5c6d" strokeWidth="5" transform="rotate(30 160 160)" />
+            {/* Yellow ring */}
+            <ellipse cx="160" cy="160" rx="120" ry="60" fill="none" stroke="#d1ac34" strokeWidth="4" transform="rotate(-25 160 160)" />
+            {/* Green ring */}
+            <ellipse cx="160" cy="160" rx="100" ry="44" fill="none" stroke="#47ad7a" strokeWidth="5" transform="rotate(60 160 160)" />
+          </motion.svg>
         </div>
 
         {/* --- CONTENT --- */}
