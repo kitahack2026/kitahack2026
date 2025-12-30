@@ -53,7 +53,7 @@ export default function Timeline() {
         setScrollRange(totalWidth - window.innerWidth);
       }
       setIsMobile(window.innerWidth < 768);
-    };
+    }; 
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX / window.innerWidth - 0.5);
@@ -75,10 +75,14 @@ export default function Timeline() {
 
 useEffect(() => {
   const generateStars = () => {
-    return Array.from({ length: 15 }).map(() => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      size: Math.random() * 4 + 2,
+    // INCREASED to 40 stars
+    return Array.from({ length: 20 }).map(() => ({
+      // STARTS at 15% to avoid overlapping the title
+      top: `${Math.random() * 85 + 15}%`, 
+      // SPREADS horizontally to 200% so stars exist at the end of the scroll
+      left: `${Math.random() * 150}%`,
+      // LARGER size for mobile visibility
+      size: Math.random() * 5 + 4,
       duration: `${Math.random() * 3 + 2}s`,
     }));
   };
@@ -118,11 +122,11 @@ useEffect(() => {
   // STEM HEIGHT: Kept compact (20px mobile) to keep top cards away from header
   const stemHeight = isMobile ? "20px" : "50px"; 
 
-  // AXIS POSITION: Moved down to 70% on mobile to aggressively clear the header
-  const axisPosition = isMobile ? "70%" : "60%";
+  // AXIS POSITION: Moved lower on mobile so timeline ends nearer bottom and reduces empty space
+  const axisPosition = isMobile ? "50%" : "60%";
 
   return (
-    <section ref={targetRef} className="relative h-[500vh] bg-[#0A0A0A]">
+    <section ref={targetRef} className="relative h-[200vh] md:h-[500vh] bg-[#0A0A0A]">
       
       {/* Global Defs for Gradients */}
       <svg width="0" height="0" className="absolute">
@@ -143,7 +147,7 @@ useEffect(() => {
 
       {/* Sticky Window with Border Glow (Top and Bottom only) */}
       <div 
-        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center perspective-[1000px] border-y-[3px]"
+        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center perspective-[1000px] border-y-[3px] pb-12 md:pb-0"
         style={{
             borderImage: `linear-gradient(to right, ${colors.blue}, ${colors.red}, ${colors.yellow}) 1`,
             boxShadow: '0 0 30px rgba(59, 132, 247, 0.3), inset 0 0 50px rgba(59, 132, 247, 0.1)'
@@ -163,14 +167,16 @@ useEffect(() => {
               {stars.map((star, i) => (
                 <div 
                   key={i}
-                  className="absolute"
+                  // FIX: Hide stars with index > 5 on mobile (hidden md:block)
+                  className={`absolute ${i > 5 ? 'hidden md:block' : ''}`}
                   style={{ top: star.top, left: star.left }}
                 >
                   <svg 
                     width={star.size * 8} 
                     height={star.size * 8} 
                     viewBox="0 0 24 24" 
-                    className="opacity-90 animate-pulse"
+                    // FIX: Lower opacity on mobile (opacity-40) vs desktop (opacity-90)
+                    className="opacity-40 md:opacity-90 animate-pulse"
                     style={{ 
                         filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))',
                         animationDuration: star.duration
@@ -186,8 +192,15 @@ useEffect(() => {
             </motion.div>
         </div>
 
-        {/* --- INTERACTIVE 3D ATOM --- */}
-        <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center" style={{ perspective: "1000px" }}>
+        {/* --- INTERACTIVE 3D ATOM (FIXED CENTER & FLOATING ANIMATION) --- */}
+        <div 
+            className="absolute w-full z-10 pointer-events-none flex justify-center" 
+            style={{ 
+                top: axisPosition,             // <--- 1. Locks vertically to the track line (60% or 70%)
+                transform: "translateY(-50%)", // <--- 2. Centers the atom exactly on that line
+                perspective: "1000px" 
+            }}
+        >
           
           <motion.div
             style={{ 
@@ -195,7 +208,14 @@ useEffect(() => {
               rotateY: rotateY,
               transformStyle: "preserve-3d"
             }}
-            className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px]"
+            // <--- 3. Adds the idle "bobbing" animation here
+            animate={{ y: [-15, 15, -15] }} 
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="relative w-[220px] h-[220px] md:w-[450px] md:h-[450px]"
           >
              <div 
                 className="absolute inset-0 bg-blue-500/20 blur-[100px] rounded-full mix-blend-screen" 
@@ -227,7 +247,8 @@ useEffect(() => {
             {/* CENTERED TITLE - Slightly smaller text on mobile */}
             <div className="absolute top-6 left-0 right-0 z-40 flex flex-col items-center justify-center pointer-events-none">
               <motion.h1 
-                className="text-2xl md:text-6xl font-bold uppercase tracking-widest drop-shadow-lg leading-tight text-center"
+                // FIX: Removed drop-shadow, kept original rainbow gradient text
+                className="text-5xl md:text-7xl font-black uppercase tracking-widest leading-tight text-center"
                 style={{ 
                     backgroundImage: `linear-gradient(90deg, ${colors.blue}, ${colors.red}, ${colors.yellow}, ${colors.blue})`,
                     backgroundSize: "200% auto",
@@ -252,7 +273,7 @@ useEffect(() => {
             <motion.div 
                 ref={containerRef}
                 style={{ x, top: axisPosition }} 
-                className="absolute left-0 flex gap-28 md:gap-64 pl-30 md:pl-60 pr-24 md:pr-96 items-center w-max -translate-y-1/2"
+                className="absolute left-0 flex gap-44 md:gap-96 pl-30 md:pl-60 pr-24 md:pr-96 items-center w-max -translate-y-1/2"
             >
               {events.map((event, index) => {
                 const isTop = index % 2 === 0;
@@ -290,7 +311,7 @@ useEffect(() => {
                       onClick={() => setSelectedEvent(event)}
                       className={`
                         absolute flex flex-col justify-between text-left
-                        h-[120px] w-[200px] md:h-[150px] md:w-[260px] 
+                        h-[120px] w-[200px] md:min-h-[160px] md:w-[260px] 
                         shrink-0 rounded-[20px] p-3 md:p-5
                         backdrop-blur-md border cursor-pointer
                         transition-all duration-300
