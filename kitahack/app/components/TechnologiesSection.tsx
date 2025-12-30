@@ -4,7 +4,20 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const neonThemes: any = {
+type themes = "green" | "cyan" | "blue" | "orange" | "yellow" | "purple" | "red" | "violet";
+
+type themesType = {
+  hoverBorder: string,
+  hoverBg: string,
+  hoverShadow: string,
+  glow: string
+}
+
+type neonThemesType = {
+  [theme in themes]: themesType
+}
+
+const neonThemes: neonThemesType = {
   green: {
     hoverBorder: "hover:border-green-400",
     hoverBg: "hover:bg-green-950/30",
@@ -55,8 +68,20 @@ const neonThemes: any = {
   },
 };
 
-const TechCard = ({ title, description, link, themeColor, icon, width, height, hideText, customIconSize }: any) => {
-  const theme = neonThemes[themeColor] || neonThemes.blue;
+type techCardPropsType = {
+  title: string,
+  description: string,
+  link: string,
+  themeColor: themes,
+  icon: string,
+  width: string,
+  height: string,
+  hideText: boolean,
+  customIconSize?: string
+}
+
+const TechCard = ({ title, description, link, themeColor, icon, width, height, hideText, customIconSize }: techCardPropsType) => {
+  const theme: themesType = neonThemes[themeColor] || neonThemes.blue;
   const iconSizeClass = customIconSize || "w-16 h-16";
 
   return (
