@@ -3,6 +3,7 @@ import AboutSection from './components/About/AboutSection';
 import Sponsors from './components/Partners/Sponsors';
 import Organizers from './components/Partners/Organizers';
 import Timeline from './components/Timeline';
+import { TechnologiesSection } from './components/TechnologiesSection';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <Timeline />
+      <TechnologiesSection />
 
       {/* Judging Section */}
       <section id="judging" className="max-w-5xl mx-auto p-8 py-20">
