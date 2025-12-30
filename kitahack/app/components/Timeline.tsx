@@ -29,12 +29,12 @@ const events = [
   { title: "Demo Day", date: "29th Mar 2026", type: "Grand Finale", location: "Auditorium", color: colors.red, details: "The Grand Finale. Live demos, food, networking, and prizes!" },
 ];
 
-export default function App() {
+export default function Timeline() {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [scrollRange, setScrollRange] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [stars, setStars] = useState<{ top: string; left: string; size: number }[]>([]);
+  const [stars, setStars] = useState<{ top: string; left: string; size: number; duration: string; }[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<typeof events[0] | null>(null);
 
   // --- MOUSE TRACKING FOR 3D ATOM ---
@@ -46,47 +46,60 @@ export default function App() {
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [20, -20]), springConfig); // Tilt X
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-20, 20]), springConfig); // Tilt Y
 
-  useEffect(() => {
+    useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const totalWidth = containerRef.current.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        setScrollRange(totalWidth - viewportWidth); 
+        setScrollRange(totalWidth - window.innerWidth);
       }
       setIsMobile(window.innerWidth < 768);
     };
 
-    updateDimensions();
-
     const handleMouseMove = (e: MouseEvent) => {
-        // Normalize mouse position from -0.5 to 0.5
-        mouseX.set(e.clientX / window.innerWidth - 0.5);
-        mouseY.set(e.clientY / window.innerHeight - 0.5);
+      mouseX.set(e.clientX / window.innerWidth - 0.5);
+      mouseY.set(e.clientY / window.innerHeight - 0.5);
     };
 
+    updateDimensions();
     window.addEventListener('resize', updateDimensions);
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Generate stars
-    const generatedStars = Array.from({ length: 15 }).map(() => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      size: Math.random() * 4 + 2, 
-    }));
-    setStars(generatedStars);
-    
-    // Keyboard listener for modal
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedEvent(null);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-
     return () => {
-        window.removeEventListener('resize', updateDimensions);
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [mouseX, mouseY]);
+
+  
+
+
+useEffect(() => {
+  const generateStars = () => {
+    return Array.from({ length: 15 }).map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: Math.random() * 4 + 2,
+      duration: `${Math.random() * 3 + 2}s`,
+    }));
+  };
+
+  // Delay the state update to avoid cascading render
+  const id = requestAnimationFrame(() => {
+    setStars(generateStars());
+  });
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') setSelectedEvent(null);
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+
+  return () => {
+    cancelAnimationFrame(id);
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, []);
+
 
   const { scrollYProgress } = useScroll({ target: targetRef });
   
@@ -160,7 +173,7 @@ export default function App() {
                     className="opacity-90 animate-pulse"
                     style={{ 
                         filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))',
-                        animationDuration: `${Math.random() * 3 + 2}s`
+                        animationDuration: star.duration
                     }}
                   >
                     <path 
