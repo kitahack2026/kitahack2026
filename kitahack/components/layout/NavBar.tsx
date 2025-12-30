@@ -75,9 +75,13 @@ function NavBar() {
 						<Link href={"/"}><Image src={logo} className="w-28 md:w-50" alt="KitaHack 2026 logo"></Image></Link>
 						
 						<ul className="hidden md:flex flex-1 justify-around gap-5">
-							{navItems.map((navItem) => {
-								return <li key={navItem.name} className={`${inter.className} font-bold text-lg text-[#F5F5F7]`}><Link href={navItem.href}>{navItem.name}</Link></li>
-							})}
+						{navItems.map((navItem) => (
+							<li key={navItem.name} className={`${inter.className} font-bold text-lg text-[#F5F5F7]`}>
+							<a href={navItem.href} onClick={() => setIsMenuOpen(false)}>
+								{navItem.name}
+							</a>
+							</li>
+						))}
 						</ul>
 
 						<button 
@@ -139,13 +143,13 @@ function NavBar() {
 													}
 												}}
 											>
-												<Link 
-													href={navItem.href} 
-													className="block px-5 py-4 hover:bg-gray-800 transition-colors"
-													onClick={() => setIsMenuOpen(false)}
+												<a 
+												href={navItem.href} 
+												className="block px-5 py-4 hover:bg-gray-800 transition-colors"
+												onClick={() => setIsMenuOpen(false)}
 												>
-													{navItem.name}
-												</Link>
+												{navItem.name}
+												</a>
 											</motion.li>
 										)
 									})}
