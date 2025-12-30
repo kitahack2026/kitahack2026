@@ -1,8 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 
 // --- CUSTOM COLORS ---
 const colors = {
@@ -13,156 +12,258 @@ const colors = {
 };
 
 const events = [
-  { title: "Info Session", date: "3rd Jan 2026", type: "Kickoff", color: colors.blue },
-  { title: "Registration Opens", date: "4th-18th Jan", type: "Launch", color: colors.yellow },
-  { title: "Workshop 1: Web Dev", date: "31st Jan 2026", type: "Workshop", color: colors.green },
-  { title: "Workshop 2: App Dev (Android Studio)", date: "1st Feb 2026", type: "Workshop", color: colors.green },
-  { title: "Workshop 3: Firebase Foundation (Backend)", date: "7th Feb 2026", type: "Workshop", color: colors.green },
-  { title: "Workshop 4: Flutter Workshop (Frontend)", date: "8th Feb 2026", type: "Workshop", color: colors.green },
-  { title: "Workshop 5: Gemini API Masterclass", date: "14th Feb 2026", type: "Workshop", color: colors.green },
-  { title: "Workshop 6: Google Cloud Platform", date: "15th Feb 2026", type: "Workshop", color: colors.green },
-  { title: "Workshop 7: KitaHack 2025 Champions Sharing", date: "TBD", type: "Workshop", color: colors.green },
-  { title: "Round 1 Deadline", date: "28th Feb 2026", type: "Deadline", color: colors.red },
-  { title: "Evaluation Period", date: "1st-7th Mar", type: "Judging", color: colors.blue },
-  { title: "Top 10 Finalists", date: "9th Mar 2026", type: "Result", color: colors.yellow },
-  { title: "Mentoring Session", date: "10th-17th Mar", type: "Mentorship", color: colors.blue },
-  { title: "Workshop 8: Pitch Perfect", date: "TBD", type: "Workshop", color: colors.green },
-  { title: "Demo Day", date: "29th Mar 2026", type: "Grand Finale", location: "Auditorium", color: colors.red },
+  { title: "Info Session", date: "3rd Jan 2026", type: "Kickoff", color: colors.blue, details: "Join us for the grand reveal of the problem statements and meet the mentors." },
+  { title: "Registration Opens", date: "4th-18th Jan", type: "Launch", color: colors.yellow, details: "Secure your spot!" },
+  { title: "Workshop 1: Web Dev", date: "31st Jan 2026", type: "Workshop", color: colors.green, details: "Intro to React, Next.js, and Tailwind CSS. Zero to Hero." },
+  { title: "Workshop 2: App Dev", date: "1st Feb 2026", type: "Workshop", color: colors.green, details: "Building your first mobile app with Android Studio and Kotlin." },
+  { title: "Workshop 3: Firebase", date: "7th Feb 2026", type: "Workshop", color: colors.green, details: "Backend as a Service: Auth, Firestore, and Cloud Functions." },
+  { title: "Workshop 4: Flutter", date: "8th Feb 2026", type: "Workshop", color: colors.green, details: "Cross-platform development magic with Flutter and Dart." },
+  { title: "Workshop 5: Gemini API", date: "14th Feb 2026", type: "Workshop", color: colors.green, details: "Integrate AI into your hacks using Google's latest Gemini models." },
+  { title: "Workshop 6: Cloud Platform", date: "15th Feb 2026", type: "Workshop", color: colors.green, details: "Deploying and scaling your solution on Google Cloud Platform." },
+   { title: "Workshop 7: From Zero To Hero", date: "TBD", type: "Workshop", color: colors.green, details: "Past champions are here to share their experience!" },
+  { title: "Round 1 Deadline", date: "28th Feb 2026", type: "Deadline", color: colors.red, details: "Submit your prototype video and slide deck. No code required yet." },
+  { title: "Evaluation Period", date: "1st-7th Mar", type: "Judging", color: colors.blue, details: "Our panel of industry experts will review all submissions." },
+  { title: "Top 10 Finalists", date: "9th Mar 2026", type: "Result", color: colors.yellow, details: "The best 10 teams will be announced to move to the final round." },
+  { title: "Mentoring Session", date: "10th-17th Mar", type: "Mentorship", color: colors.blue, details: "1-on-1 sessions with Google Experts to polish your final product." },
+  { title: "Pitch Perfect", date: "TBD", type: "Workshop", color: colors.green, details: "Master the art of the pitch. Learn how to sell your idea in 3 minutes." },
+  { title: "Demo Day", date: "29th Mar 2026", type: "Grand Finale", location: "Auditorium", color: colors.red, details: "The Grand Finale. Live demos, food, networking, and prizes!" },
 ];
 
-
-
-export default function Timeline() {
+export default function App() {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [scrollRange, setScrollRange] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [stars, setStars] = useState<{ top: string; left: string; size: number }[]>([]);
+  const [selectedEvent, setSelectedEvent] = useState<typeof events[0] | null>(null);
+
+  // --- MOUSE TRACKING FOR 3D ATOM ---
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth out the mouse movement for the 3D tilt effect
+  const springConfig = { damping: 25, stiffness: 150 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [20, -20]), springConfig); // Tilt X
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-20, 20]), springConfig); // Tilt Y
 
   useEffect(() => {
-    const updateWidth = () => {
+    const updateDimensions = () => {
       if (containerRef.current) {
         const totalWidth = containerRef.current.scrollWidth;
         const viewportWidth = window.innerWidth;
-        // Calculation: Total Width - Screen Width
-        // The reduced padding (pr-20) below ensures this calculation doesn't leave huge gaps
         setScrollRange(totalWidth - viewportWidth); 
       }
+      setIsMobile(window.innerWidth < 768);
     };
 
-    const timeoutId = setTimeout(updateWidth, 500);
-    window.addEventListener('resize', updateWidth);
-    return () => {
-        window.removeEventListener('resize', updateWidth);
-        clearTimeout(timeoutId);
+    updateDimensions();
+
+    const handleMouseMove = (e: MouseEvent) => {
+        // Normalize mouse position from -0.5 to 0.5
+        mouseX.set(e.clientX / window.innerWidth - 0.5);
+        mouseY.set(e.clientY / window.innerHeight - 0.5);
     };
-  }, []);
+
+    window.addEventListener('resize', updateDimensions);
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Generate stars
+    const generatedStars = Array.from({ length: 15 }).map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: Math.random() * 4 + 2, 
+    }));
+    setStars(generatedStars);
+    
+    // Keyboard listener for modal
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedEvent(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+        window.removeEventListener('resize', updateDimensions);
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mouseX, mouseY]);
 
   const { scrollYProgress } = useScroll({ target: targetRef });
   
   // 1. TIMELINE SCROLL
   const x = useTransform(scrollYProgress, [0, 1], ["0px", `-${scrollRange}px`]);
 
-  // Map scroll (0 to 1) to rotation (0 to 360 degrees)
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+  // 2. PARALLAX STARS
+  const bgX = useTransform(scrollYProgress, [0, 1], ["0px", `-${scrollRange * 0.2}px`]);
 
-  // 2. TITLE ANIMATION (Color Shift Only - No Movement)
-  // This ensures the title stays exactly where it is but still looks interactive
+  // 3. TITLE ANIMATION
   const titleBgPos = useTransform(scrollYProgress, [0, 1], ["0% 50%", "100% 50%"]);
+
+  // 4. ATOM SPIN (LINKED TO SCROLL)
+  const atomRotate = useTransform(scrollYProgress, [0, 1], [0, 720]);
+
+  // STEM HEIGHT: Kept compact (20px mobile) to keep top cards away from header
+  const stemHeight = isMobile ? "20px" : "50px"; 
+
+  // AXIS POSITION: Moved down to 70% on mobile to aggressively clear the header
+  const axisPosition = isMobile ? "70%" : "60%";
 
   return (
     <section ref={targetRef} className="relative h-[500vh] bg-[#0A0A0A]">
       
-      {/* Sticky Window */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
+      {/* Global Defs for Gradients */}
+      <svg width="0" height="0" className="absolute">
+        <defs>
+          <linearGradient id="geminiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#cb5c6d" />   {/* Red */}
+            <stop offset="35%" stopColor="#d1ac34" />   {/* Yellow */}
+            <stop offset="70%" stopColor="#47ad7a" />   {/* Green */}
+            <stop offset="100%" stopColor="#3b84f7" />  {/* Blue */}
+          </linearGradient>
 
-        {/* --- BACKGROUND --- */}
-        <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          <radialGradient id="atomGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="white" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+      </svg>
+
+      {/* Sticky Window with Border Glow (Top and Bottom only) */}
+      <div 
+        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center perspective-[1000px] border-y-[3px]"
+        style={{
+            borderImage: `linear-gradient(to right, ${colors.blue}, ${colors.red}, ${colors.yellow}) 1`,
+            boxShadow: '0 0 30px rgba(59, 132, 247, 0.3), inset 0 0 50px rgba(59, 132, 247, 0.1)'
+        }}
+      >
+
+        {/* --- BACKGROUND LAYERS --- */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#0F0F0F] to-[#050505]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+
+             {/* Parallax Stars */}
+             <motion.div 
+              style={{ x: bgX }} 
+              className="absolute inset-0 w-[150vw]"
+            >
+              {stars.map((star, i) => (
+                <div 
+                  key={i}
+                  className="absolute"
+                  style={{ top: star.top, left: star.left }}
+                >
+                  <svg 
+                    width={star.size * 8} 
+                    height={star.size * 8} 
+                    viewBox="0 0 24 24" 
+                    className="opacity-90 animate-pulse"
+                    style={{ 
+                        filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))',
+                        animationDuration: `${Math.random() * 3 + 2}s`
+                    }}
+                  >
+                    <path 
+                        d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" 
+                        fill="url(#geminiGradient)" 
+                    />
+                  </svg>
+                </div>
+              ))}
+            </motion.div>
         </div>
 
-        {/* --- ANIMATED SVG (Google Atom Replacement) --- */}
-        <div className="absolute w-full z-10 pointer-events-none flex justify-center -translate-y-1/2 top-[60%]">
-          <motion.svg
-            width="320" height="320" viewBox="0 0 320 320"
+        {/* --- INTERACTIVE 3D ATOM --- */}
+        <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center" style={{ perspective: "1000px" }}>
+          
+          <motion.div
             style={{ 
-              rotate, 
-              filter: 'drop-shadow(0 0 32px #3b84f7aa)' 
+              rotateX: rotateX, 
+              rotateY: rotateY,
+              transformStyle: "preserve-3d"
             }}
-
-            // B. IDLE FLOATING ANIMATION (Bobs up and down)
-            animate={{ y: [-15, 15, -15] }} 
-            transition={{ 
-              duration: 6,           // Takes 6 seconds for one full float cycle
-              repeat: Infinity,      // Never stops
-              ease: "easeInOut"      // Smooth slowing down at top and bottom
-            }}
+            className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px]"
           >
-            {/* Core */}
-            <circle cx="160" cy="160" r="38" fill="#fff" fillOpacity="0.95" />
-            {/* Blue ring */}
-            <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#3b84f7" strokeWidth="6" />
-            {/* Red ring */}
-            <ellipse cx="160" cy="160" rx="90" ry="38" fill="none" stroke="#cb5c6d" strokeWidth="5" transform="rotate(30 160 160)" />
-            {/* Yellow ring */}
-            <ellipse cx="160" cy="160" rx="120" ry="60" fill="none" stroke="#d1ac34" strokeWidth="4" transform="rotate(-25 160 160)" />
-            {/* Green ring */}
-            <ellipse cx="160" cy="160" rx="100" ry="44" fill="none" stroke="#47ad7a" strokeWidth="5" transform="rotate(60 160 160)" />
-          </motion.svg>
+             <div 
+                className="absolute inset-0 bg-blue-500/20 blur-[100px] rounded-full mix-blend-screen" 
+                style={{ transform: "translateZ(-50px)" }}
+             />
+
+             <motion.svg
+                className="w-full h-full opacity-100"
+                viewBox="0 0 320 320"
+                style={{ 
+                  rotate: atomRotate, 
+                  filter: 'drop-shadow(0 0 30px rgba(59, 132, 247, 0.5))',
+                  transformStyle: "preserve-3d",
+                  transform: "translateZ(20px)" 
+                }}
+              >
+                <circle cx="160" cy="160" r="25" fill="white" fillOpacity="0.9" filter="drop-shadow(0 0 10px white)" />
+                <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#3b84f7" strokeWidth="4" className="opacity-80" />
+                <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#cb5c6d" strokeWidth="4" transform="rotate(60 160 160)" className="opacity-80" />
+                <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#47ad7a" strokeWidth="4" transform="rotate(120 160 160)" className="opacity-80" />
+                <ellipse cx="160" cy="160" rx="80" ry="30" fill="none" stroke="#d1ac34" strokeWidth="3" transform="rotate(-30 160 160)" className="opacity-60" />
+             </motion.svg>
+          </motion.div>
         </div>
 
         {/* --- CONTENT --- */}
-        <div className="relative z-20 w-full h-full flex items-center">
+        <div className="relative z-20 w-full h-full">
             
-            {/* TITLE: Fixed in place, only color animates */}
-            <div className="absolute top-8 left-8 md:left-12 z-40">
+            {/* CENTERED TITLE - Slightly smaller text on mobile */}
+            <div className="absolute top-6 left-0 right-0 z-40 flex flex-col items-center justify-center pointer-events-none">
               <motion.h1 
-                className="text-5xl md:text-6xl font-bold uppercase tracking-widest drop-shadow-lg"
+                className="text-2xl md:text-6xl font-bold uppercase tracking-widest drop-shadow-lg leading-tight text-center"
                 style={{ 
                     backgroundImage: `linear-gradient(90deg, ${colors.blue}, ${colors.red}, ${colors.yellow}, ${colors.blue})`,
                     backgroundSize: "200% auto",
-                    backgroundPosition: titleBgPos, // Links gradient to scroll
+                    backgroundPosition: titleBgPos,
                     WebkitBackgroundClip: "text", 
                     WebkitTextFillColor: "transparent" 
                 }}
               >
-                KITAHACK 2026 TIMELINE
+                TIMELINE
               </motion.h1>
+              {/* Decorative Bar Below */}
+              <div className="h-1 w-16 md:h-1.5 md:w-24 rounded-full mt-2 md:mt-3 bg-gradient-to-r from-transparent via-white/50 to-transparent" />
             </div>
 
             {/* Central Track Line */}
-            <div className="absolute top-[60%] left-0 w-full h-[2px] bg-white/20 -translate-y-1/2" />
+            <div 
+              className="absolute left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-y-1/2" 
+              style={{ top: axisPosition }}
+            />
 
-            {/* Moving Train */}
+            {/* Moving Train - INCREASED STARTING PADDING (pl-24) to show first card */}
             <motion.div 
                 ref={containerRef}
-                style={{ x }} 
-                // pl-36:  Slightly less left padding to tighten start
-                // pr-32:  More right padding to ensure the last card is fully visible
-                className="flex gap-48 pl-44 pr-40 items-center w-max"
+                style={{ x, top: axisPosition }} 
+                className="absolute left-0 flex gap-28 md:gap-64 pl-30 md:pl-60 pr-24 md:pr-96 items-center w-max -translate-y-1/2"
             >
               {events.map((event, index) => {
                 const isTop = index % 2 === 0;
 
                 return (
-                  <div key={index} className="relative flex flex-col items-center justify-center h-0 mt-[20vh]">
+                  <div key={index} className="relative flex flex-col items-center justify-center h-0 mt-0">
                     
                     {/* Connector Dot */}
                     <div 
-                      className="absolute w-4 h-4 rounded-full border-2 bg-[#0F0F0F] z-30"
+                      className="absolute w-3 h-3 md:w-4 md:h-4 rounded-full border-2 bg-[#0F0F0F] z-30"
                       style={{ 
                         transform: 'translate(-50%, -50%)',
                         left: '50%',
                         top: '0', 
                         borderColor: event.color,
-                        boxShadow: `0 0 10px ${event.color}`
+                        boxShadow: `0 0 15px ${event.color}`
                       }}
                     />
 
                     {/* Connector Stem */}
                     <div 
-                      className="absolute w-[2px] bg-white/30"
+                      className="absolute w-[2px]"
                       style={{
-                        height: "80px", 
+                        height: stemHeight, 
                         left: "50%",
                         top: isTop ? "auto" : "0",    
                         bottom: isTop ? "0" : "auto",
@@ -172,50 +273,65 @@ export default function Timeline() {
                     />
 
                     {/* The Card */}
-                    <div 
+                    <motion.div
+                      onClick={() => setSelectedEvent(event)}
                       className={`
-                        absolute flex flex-col justify-between
-                        h-[180px] w-[260px] 
-                        shrink-0 rounded-[20px] p-5
-                        backdrop-blur-md border
-                        transition-all duration-500
-                        group hover:scale-105
+                        absolute flex flex-col justify-between text-left
+                        h-[120px] w-[200px] md:h-[150px] md:w-[260px] 
+                        shrink-0 rounded-[20px] p-3 md:p-5
+                        backdrop-blur-md border cursor-pointer
+                        transition-all duration-300
+                        group hover:scale-105 hover:shadow-2xl
                       `}
                       style={{
-                        bottom: isTop ? "80px" : "auto", 
-                        top: isTop ? "auto" : "80px",
+                        bottom: isTop ? stemHeight : "auto", 
+                        top: isTop ? "auto" : stemHeight,
                         left: "50%",
-                        // Nudge the first card slightly left for visual balance
                         transform: index === 0 ? "translateX(calc(-50% - 8px))" : "translateX(-50%)",
                         
-                        borderColor: `${event.color}40`,
-                        backgroundColor: "rgba(15, 15, 15, 0.85)",
-                        boxShadow: `0 0 20px -5px ${event.color}20`
+                        // Glow Effect
+                        borderColor: `${event.color}`, 
+                        backgroundColor: "rgba(10, 10, 10, 0.85)",
+                        boxShadow: `0 0 20px ${event.color}40, inset 0 0 10px ${event.color}10`
                       }}
                     >
+                      {/* Inner Shine on Hover */}
                       <div className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                        style={{ boxShadow: `inset 0 0 20px ${event.color}30` }} />
+                        style={{ boxShadow: `inset 0 0 30px ${event.color}40` }} />
 
                       <div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border" 
-                              style={{ color: event.color, borderColor: `${event.color}40`, backgroundColor: `${event.color}10` }}>
+                        <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border shadow-[0_0_10px_currentColor]" 
+                              style={{ 
+                                color: "#fff", 
+                                borderColor: `${event.color}`, 
+                                backgroundColor: event.color,
+                              }}>
                           {event.type}
                         </span>
-                        <h3 className="text-xl font-bold text-white mt-3 leading-tight">{event.title}</h3>
+                        <h3 className="text-sm md:text-xl font-bold text-white mt-2 md:mt-3 leading-tight drop-shadow-md group-hover:text-[white] line-clamp-2">{event.title}</h3>
                       </div>
 
-                      <div className="mt-2 pt-3 border-t border-white/10">
-                        <p className="text-sm font-mono text-gray-300">{event.date}</p>
-                        {event.location && <p className="text-xs text-gray-500 mt-1 flex items-center gap-2">📍 {event.location}</p>}
+                      <div className="mt-1 md:mt-2 pt-2 md:pt-3 border-t border-white/20 flex justify-between items-end">
+                        <div className="min-w-0 flex-1 mr-2">
+                            <p className="text-[9px] md:text-sm font-mono text-gray-200 drop-shadow-sm">{event.date}</p>
+                            {event.location && (
+                              <p className="text-[9px] md:text-xs text-gray-400 mt-1 flex items-center gap-1">
+                                <span className="shrink-0">📍</span>
+                                <span className="truncate">{event.location}</span>
+                              </p>
+                            )}
+                        </div>
+                        <div className="text-white/50 text-[9px] md:text-xs opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                            Details &rarr;
+                        </div>
                       </div>
-                    </div>
+                    </motion.div>
 
                   </div>
                 );
               })}
             </motion.div>
         </div>
-        
       </div>
 
       {/* Progress Bar */}
@@ -223,6 +339,71 @@ export default function Timeline() {
         className="fixed bottom-0 left-0 right-0 h-1.5 origin-left z-50"
         style={{ scaleX: scrollYProgress, background: `linear-gradient(to right, ${colors.blue}, ${colors.red}, ${colors.yellow})` }} 
       />
+
+       {/* --- DETAIL MODAL --- */}
+       <AnimatePresence>
+        {selectedEvent && (
+            <motion.div 
+                className="fixed inset-0 z-[100] flex items-center justify-center px-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+            >
+                {/* Backdrop */}
+                <div 
+                    className="absolute inset-0 bg-black/80 backdrop-blur-md"
+                    onClick={() => setSelectedEvent(null)}
+                />
+
+                {/* Modal Content */}
+                <motion.div 
+                    className="relative bg-[#0F0F0F] border border-white/10 rounded-2xl p-6 md:p-8 max-w-lg w-full shadow-2xl overflow-hidden"
+                    initial={{ scale: 0.9, y: 20, opacity: 0 }}
+                    animate={{ scale: 1, y: 0, opacity: 1 }}
+                    exit={{ scale: 0.9, y: 20, opacity: 0 }}
+                >
+                     {/* Decorative Glow */}
+                     <div 
+                        className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-[60px] pointer-events-none opacity-50"
+                        style={{ background: selectedEvent.color }} 
+                    />
+
+                    <button 
+                        onClick={() => setSelectedEvent(null)}
+                        className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+                    >
+                        ✕
+                    </button>
+
+                    <div className="relative z-10">
+                        <span className="inline-block px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-4 border"
+                              style={{ 
+                                  color: "#fff", 
+                                  borderColor: selectedEvent.color,
+                                  backgroundColor: selectedEvent.color,
+                                  boxShadow: `0 0 10px ${selectedEvent.color}`
+                              }}>
+                            {selectedEvent.type}
+                        </span>
+                        
+                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">{selectedEvent.title}</h2>
+                        <p className="text-gray-400 font-mono text-sm mb-6 flex items-center gap-4">
+                            <span>🗓 {selectedEvent.date}</span>
+                            {selectedEvent.location && <span>📍 {selectedEvent.location}</span>}
+                        </p>
+
+                        <div className="bg-white/5 rounded-xl p-5 border border-white/5">
+                            <h4 className="text-xs uppercase text-gray-500 mb-2 font-bold tracking-widest">About this Event</h4>
+                            <p className="text-gray-200 leading-relaxed text-sm md:text-base">
+                                {selectedEvent.details}
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+            </motion.div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }
