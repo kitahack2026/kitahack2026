@@ -4,6 +4,7 @@ import Sponsors from './components/Partners/Sponsors';
 import Organizers from './components/Partners/Organizers';
 import Timeline from './components/Timeline';
 import { TechnologiesSection } from './components/TechnologiesSection';
+import FAQSection from './components/FAQ/FAQSection'; 
 
 export default function Home() {
   return (
@@ -102,6 +103,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <FAQSection />
 
       <Sponsors />
       <Organizers />

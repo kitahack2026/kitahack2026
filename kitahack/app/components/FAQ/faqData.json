@@ -1,0 +1,152 @@
+[
+  {
+    "category": "General",
+    "items": [
+      {
+        "id": "gen1",
+        "question": "What is GDGoC KitaHack 2026?",
+        "answer": "GDGoC KitaHack 2026 is an open-ended, student-focused hackathon that enables participants to design and develop SDG-aligned solutions using AI and Google technologies through a structured, workshop-driven format."
+      },
+      {
+        "id": "gen2",
+        "question": "Who is organising the hackathon?",
+        "answer": "The hackathon is organised by Google Developer Groups on Campus (GDGoC) in collaboration with academic and industry partners."
+      },
+      {
+        "id": "gen3",
+        "question": "When and where will the hackathon be held?",
+        "answer": "Details regarding dates, venue, and event format (physical, virtual, or hybrid) will be communicated on the official website and through registered participant channels."
+      }
+    ]
+  },
+  {
+    "category": "Eligibility & Participation",
+    "items": [
+      {
+        "id": "eli1",
+        "question": "Who is eligible to participate?",
+        "answer": "The hackathon is open to students from recognised higher education institutions. Eligibility criteria may vary depending on partnership or sponsorship requirements."
+      },
+      {
+        "id": "eli2",
+        "question": "Do participants need prior hackathon or AI experience?",
+        "answer": "No prior hackathon or advanced technical experience is required. The event is designed to accommodate participants of varying skill levels through guided workshops and mentorship."
+      },
+      {
+        "id": "eli3",
+        "question": "Is there an age limit for participation?",
+        "answer": "Participants must meet the minimum age requirement as specified in the registration guidelines."
+      }
+    ]
+  },
+  {
+    "category": "Team Formation",
+    "items": [
+      {
+        "id": "tea1",
+        "question": "Is this a team-based hackathon?",
+        "answer": "Yes. Participants are expected to compete in teams. However, if you wish to do solo, it should be fine as long as you are in the GDGoC chapters."
+      },
+      {
+        "id": "tea2",
+        "question": "What is the required team size?",
+        "answer": "Maximum of 4 people."
+      },
+      {
+        "id": "tea3",
+        "question": "Can participants join the hackathon individually?",
+        "answer": "Individual registrations are allowed; however, participants may be required to form or join a team before submission."
+      }
+    ]
+  },
+  {
+    "category": "Hackathon Format",
+    "items": [
+      {
+        "id": "for1",
+        "question": "Does the hackathon provide a fixed case study or problem statement?",
+        "answer": "No. GDGoC KitaHack 2026 follows an open-ended format. Teams are free to propose any project provided it aligns with the United Nations Sustainable Development Goals (SDGs) and meaningfully incorporates AI or Google technologies."
+      },
+      {
+        "id": "for2",
+        "question": "Why is an open-ended format used?",
+        "answer": "This approach allows participants the flexibility to address real-world problems of their choice while gaining hands-on experience applying Google technologies, aligning with the objectives of the Google Solution Challenge."
+      }
+    ]
+  },
+  {
+    "category": "Technology & Resources",
+    "items": [
+      {
+        "id": "tech1",
+        "question": "Are teams required to use specific technologies?",
+        "answer": "Projects must meaningfully incorporate AI or Google technologies (e.g. Firebase, Flutter, Cloud Run, Vertex AI). The choice of tools should be appropriate to the problem being solved."
+      },
+      {
+        "id": "tech2",
+        "question": "Will workshops or mentoring be provided?",
+        "answer": "Yes. Participants will receive structured guidance through a progressive workshop flow covering areas such as backend development, frontend development, AI, and cloud technologies."
+      }
+    ]
+  },
+  {
+    "category": "Submission & Evaluation",
+    "items": [
+      {
+        "id": "sub1",
+        "question": "What are the submission requirements?",
+        "answer": "Teams are required to submit a project description, technical implementation overview, working prototype, demonstration video, and presentation slides in accordance with the published submission guidelines."
+      },
+      {
+        "id": "sub2",
+        "question": "What is the evaluation process?",
+        "answer": "Submissions will be evaluated during the preliminary round based on predefined judging criteria, followed by presentation and demonstration during the judging round."
+      },
+      {
+        "id": "sub3",
+        "question": "Who will evaluate the projects?",
+        "answer": "Projects will be evaluated by a panel of judges comprising industry professionals, technical experts, and academic representatives."
+      }
+    ]
+  },
+  {
+    "category": "Prizes & Recognition",
+    "items": [
+      {
+        "id": "prz1",
+        "question": "Are there prizes for winning teams?",
+        "answer": "Yes. Prize details will be announced on the official website."
+      },
+      {
+        "id": "prz2",
+        "question": "Will participants receive certificates?",
+        "answer": "Certificates of participation will be provided to eligible participants who meet the submission requirements."
+      }
+    ]
+  },
+  {
+    "category": "Post-Event",
+    "items": [
+      {
+        "id": "post1",
+        "question": "Can teams continue developing their projects after the hackathon?",
+        "answer": "Yes. Teams are encouraged to further refine and develop their solutions beyond the hackathon period."
+      },
+      {
+        "id": "post2",
+        "question": "Who owns the intellectual property (IP) of submitted projects?",
+        "answer": "Unless otherwise stated, teams retain ownership of their projects. Specific IP terms will be outlined in the official rules and regulations."
+      }
+    ]
+  },
+  {
+    "category": "Support & Contact",
+    "items": [
+      {
+        "id": "sup1",
+        "question": "How can participants seek assistance during the hackathon?",
+        "answer": "Support channels and contact details will be provided to registered participants prior to the event."
+      }
+    ]
+  }
+]
