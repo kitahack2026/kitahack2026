@@ -61,6 +61,9 @@ export default function Timeline() {
   // 1. TIMELINE SCROLL
   const x = useTransform(scrollYProgress, [0, 1], ["0px", `-${scrollRange}px`]);
 
+  // Map scroll (0 to 1) to rotation (0 to 360 degrees)
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+
   // 2. TITLE ANIMATION (Color Shift Only - No Movement)
   // This ensures the title stays exactly where it is but still looks interactive
   const titleBgPos = useTransform(scrollYProgress, [0, 1], ["0% 50%", "100% 50%"]);
@@ -78,13 +81,21 @@ export default function Timeline() {
         </div>
 
         {/* --- ANIMATED SVG (Google Atom Replacement) --- */}
-        <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
+        <div className="absolute w-full z-10 pointer-events-none flex justify-center -translate-y-1/2 top-[60%]">
           <motion.svg
             width="320" height="320" viewBox="0 0 320 320"
-            initial={{ rotate: 0 }}
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 16, ease: "linear" }}
-            style={{ filter: 'drop-shadow(0 0 32px #3b84f7aa)' }}
+            style={{ 
+              rotate, 
+              filter: 'drop-shadow(0 0 32px #3b84f7aa)' 
+            }}
+
+            // B. IDLE FLOATING ANIMATION (Bobs up and down)
+            animate={{ y: [-15, 15, -15] }} 
+            transition={{ 
+              duration: 6,           // Takes 6 seconds for one full float cycle
+              repeat: Infinity,      // Never stops
+              ease: "easeInOut"      // Smooth slowing down at top and bottom
+            }}
           >
             {/* Core */}
             <circle cx="160" cy="160" r="38" fill="#fff" fillOpacity="0.95" />
