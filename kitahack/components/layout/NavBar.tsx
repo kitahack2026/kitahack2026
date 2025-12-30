@@ -24,7 +24,7 @@ const navItems: NavItemType[] = [
 	},
 	{
 		name: "Google Technologies",
-		href: "https://developers.google.com/"
+		href: "/#google-tech"
 	},
 	{
 		name: "Criteria",
