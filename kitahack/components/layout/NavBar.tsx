@@ -4,7 +4,9 @@ import Image from "next/image"
 import logo from "../../public/logo.png";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {Menu, X } from "lucide-react";
 
 const inter = Inter({
 	subsets: ['latin']
@@ -18,7 +20,7 @@ type NavItemType = {
 const navItems: NavItemType[] = [
 	{
 		name: "About",
-		href: "/"
+		href: "/#about"
 	},
 	{
 		name: "Google Technologies",
@@ -26,22 +28,47 @@ const navItems: NavItemType[] = [
 	},
 	{
 		name: "Criteria",
-		href: "/"
+		href: "/#judging"
 	},
 	{
 		name: "FAQs",
-		href: "/"
+		href: "/#faq"
 	}
 ]
 
-// TODO: Add other links to the nav items
-// TODO: Add animations maybe to the mobile dropdown
-
 function NavBar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isVisible, setIsVisible] = useState(true);
+	const [lastScrollY, setLastScrollY] = useState(0);
+
+	useEffect(() => {
+		const controlNavbar = () => {
+			const currentScrollY = window.scrollY;
+
+			if (currentScrollY > lastScrollY && currentScrollY > 80) {
+				setIsVisible(false);
+				setIsMenuOpen(false);
+			} else {
+				setIsVisible(true);
+			}
+
+			setLastScrollY(currentScrollY);
+		};
+
+		window.addEventListener('scroll', controlNavbar);
+
+		return () => {
+			window.removeEventListener('scroll', controlNavbar);
+		};
+	}, [lastScrollY]);
 
 	return (
-		<header>
+		<motion.header
+			className="fixed top-0 left-0 right-0 z-50"
+			initial={{ y: 0 }}
+			animate={{ y: isVisible ? 0 : -100 }}
+			transition={{ duration: 0.3, ease: "easeInOut" }}
+		>
 			<nav aria-label="Main Navigation">
 				<div className="bg-[#1A1A1A]">
 					<div className="flex gap-10 p-5 items-center max-w-360 mx-auto relative">
@@ -59,38 +86,76 @@ function NavBar() {
 							aria-label="Toggle menu"
 							aria-expanded={isMenuOpen}
 						>
-							<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								{isMenuOpen ? (
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-								) : (
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-								)}
-							</svg>
+							{isMenuOpen ? (
+								<X size={24}></X>
+							) : (
+								<Menu size={24}></Menu>
+							)}
 						</button>
 					</div>
 
-					{isMenuOpen && (
-						<div className="md:hidden bg-[#1A1A1A] border-t border-gray-700">
-							<ul className="flex flex-col">
-								{navItems.map((navItem) => {
-									return (
-										<li key={navItem.name} className={`${inter.className} font-bold text-lg text-[#F5F5F7] border-b border-gray-700`}>
-											<Link 
-												href={navItem.href} 
-												className="block px-5 py-4 hover:bg-gray-800 transition-colors"
-												onClick={() => setIsMenuOpen(false)}
+					<AnimatePresence>
+						{isMenuOpen && (
+							<motion.div 
+								className="md:hidden bg-[#1A1A1A] border-t border-gray-700 overflow-hidden"
+								initial={{ height: 0, opacity: 0 }}
+								animate={{ height: "auto", opacity: 1 }}
+								exit={{ height: 0, opacity: 0 }}
+								transition={{ duration: 0.2, ease: "easeInOut" }}
+							>
+								<motion.ul 
+									className="flex flex-col"
+									initial="closed"
+									animate="open"
+									exit="closed"
+									variants={{
+										open: {
+											transition: { staggerChildren: 0.07, delayChildren: 0.1 }
+										},
+										closed: {
+											transition: { staggerChildren: 0.05, staggerDirection: -1 }
+										}
+									}}
+								>
+									{navItems.map((navItem) => {
+										return (
+											<motion.li 
+												key={navItem.name} 
+												className={`${inter.className} font-bold text-lg text-[#F5F5F7] border-b border-gray-700`}
+												variants={{
+													open: {
+														y: 0,
+														opacity: 1,
+														transition: {
+															y: { stiffness: 1000, velocity: -100 }
+														}
+													},
+													closed: {
+														y: -20,
+														opacity: 0,
+														transition: {
+															y: { stiffness: 1000 }
+														}
+													}
+												}}
 											>
-												{navItem.name}
-											</Link>
-										</li>
-									)
-								})}
-							</ul>
-						</div>
-					)}
+												<Link 
+													href={navItem.href} 
+													className="block px-5 py-4 hover:bg-gray-800 transition-colors"
+													onClick={() => setIsMenuOpen(false)}
+												>
+													{navItem.name}
+												</Link>
+											</motion.li>
+										)
+									})}
+								</motion.ul>
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</div>
 			</nav>
-		</header>
+		</motion.header>
 	)
 }
 
