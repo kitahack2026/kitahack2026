@@ -12,7 +12,7 @@ const colors = {
 };
 
 const events = [
-  { title: "Info Session", date: "3rd Jan 2026", type: "Kickoff", color: colors.blue, details: "Join us for the grand reveal of the problem statements and meet the mentors." },
+  { title: "Info Session", date: "3rd Jan 2026", type: "Kickoff", color: colors.blue, details: "Join us for the grand reveal of the problem statements. " },
   { title: "Registration Opens", date: "4th-18th Jan", type: "Launch", color: colors.yellow, details: "Secure your spot!" },
   { title: "Workshop 1: Web Dev", date: "31st Jan 2026", type: "Workshop", color: colors.green, details: "Intro to React, Next.js, and Tailwind CSS." },
   { title: "Workshop 2: App Dev", date: "1st Feb 2026", type: "Workshop", color: colors.green, details: "Building your first mobile app with Android Studio and Kotlin." },
@@ -20,11 +20,11 @@ const events = [
   { title: "Workshop 4: Flutter", date: "8th Feb 2026", type: "Workshop", color: colors.green, details: "Cross-platform development magic with Flutter and Dart." },
   { title: "Workshop 5: Gemini API", date: "14th Feb 2026", type: "Workshop", color: colors.green, details: "Integrate AI into your hacks using Google's latest Gemini models." },
   { title: "Workshop 6: Cloud Platform", date: "15th Feb 2026", type: "Workshop", color: colors.green, details: "Deploying and scaling your solution on Google Cloud Platform." },
-   { title: "Workshop 7: From Zero To Hero", date: "TBD", type: "Workshop", color: colors.green, details: "Past champions are here to share their experience!" },
-  { title: "Round 1 Deadline", date: "28th Feb 2026", type: "Deadline", color: colors.red, details: "Submit your prototype video and slide deck. No code required yet." },
+  { title: "Workshop 7: From Zero To Hero", date: "TBD", type: "Workshop", color: colors.green, details: "Past champions are here to share their experience!" },
+  { title: "Round 1 Deadline", date: "28th Feb 2026", type: "Deadline", color: colors.red, details: "Submission guidelines will be published soon." },
   { title: "Evaluation Period", date: "1st-7th Mar", type: "Judging", color: colors.blue, details: "Our panel of industry experts will review all submissions." },
   { title: "Top 10 Finalists", date: "9th Mar 2026", type: "Result", color: colors.yellow, details: "The best 10 teams will be announced to move to the final round." },
-  { title: "Mentoring Session", date: "10th-17th Mar", type: "Mentorship", color: colors.blue, details: "1-on-1 sessions with Google Experts to polish your final product." },
+  { title: "Mentoring Session", date: "10th-17th Mar", type: "Mentorship", color: colors.blue, details: "Sessions with experts to polish your final product." },
   { title: "Pitch Perfect", date: "TBD", type: "Workshop", color: colors.green, details: "Master the art of the pitch. Learn how to sell your idea." },
   { title: "Demo Day", date: "29th Mar 2026", type: "Grand Finale", location: "Sunway Art Gallery", color: colors.red, details: "The Grand Finale. Live demos, food, networking, and prizes!" },
 ];
@@ -61,6 +61,7 @@ export default function Timeline() {
     };
 
     updateDimensions();
+    // Re-calculate on resize (handles zoom)
     window.addEventListener('resize', updateDimensions);
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -119,18 +120,20 @@ useEffect(() => {
   // 4. ATOM SPIN (LINKED TO SCROLL)
   const atomRotate = useTransform(scrollYProgress, [0, 1], [0, 720]);
 
-  // STEM HEIGHT: Increased to 50px on mobile to fill vertical space
-  const stemHeight = isMobile ? "50px" : "80px"; 
+  // STEM HEIGHT: 
+  // Desktop: Responsive height that shrinks on zoom.
+  // Using 'min(80px, 8vh)' means "Use 80px, but if 8vh is smaller (zoomed in), use that instead."
+  const stemHeight = isMobile ? "50px" : "min(80px, 8vh)";
 
-  // AXIS POSITION: Centered at 50%
-  const axisPosition = "50%";
+  // AXIS POSITION: 
+  // Moved to 60% to create more space between title and timeline
+  const axisPosition = "60%";
 
   if (isMobile) {
     return (
-      <section className="relative min-h-screen bg-[#0A0A0A] py-12 px-4 overflow-hidden">
+      <section className="relative min-h-screen bg-[#0A0A0A] py-12 px-4 overflow-hidden pt-24">
          {/* Background Stars for Mobile */}
          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            {/* Removed the grid background div here */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#0F0F0F] to-[#050505]" />
              {stars.slice(0, 10).map((star, i) => (
                 <div 
@@ -288,7 +291,7 @@ useEffect(() => {
 
       {/* Sticky Window with Border Glow (Top and Bottom only) */}
       <div 
-        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center perspective-[1000px] border-y-[3px] pb-12 md:pb-0"
+        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center perspective-[1000px] border-y-[3px] pb-12 md:pb-0 pt-20"
         style={{
             borderImage: `linear-gradient(to right, ${colors.blue}, ${colors.red}, ${colors.yellow}) 1`,
             boxShadow: '0 0 30px rgba(59, 132, 247, 0.3), inset 0 0 50px rgba(59, 132, 247, 0.1)'
@@ -439,7 +442,7 @@ useEffect(() => {
                       style={{
                         height: stemHeight, 
                         left: "50%",
-                        top: isTop ? "auto" : "0",    
+                        top: isTop ? "auto" : "0",    
                         bottom: isTop ? "0" : "auto",
                         transform: 'translateX(-50%)', 
                         background: `linear-gradient(to ${isTop ? "top" : "bottom"}, ${event.color}, transparent)`
