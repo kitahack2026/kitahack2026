@@ -47,7 +47,7 @@ export default function FAQSection() {
                     md:rounded-[32px] 
                     md:p-12 
                     md:overflow-hidden
-                    md:shadow-[-20px_20px_100px_rgba(59,132,247,0.5),20px_-20px_100px_rgba(203,92,109,0.5)]
+                    md:shadow-[-20px_20px_100px_rgba(59,132,247,0.5),20px_-20px_100px_rgba(71,173,122,0.5)]
                     "
                 >
                     <h2 className="text-4xl font-bold mb-10 text-white text-center">Frequently Asked Questions</h2>
@@ -99,7 +99,7 @@ export default function FAQSection() {
                                 <SelectItem 
                                   key={item.category} 
                                   value={item.category}
-                                  className="focus:bg-white/10 focus:text-[#3B84F7] cursor-pointer"
+                                  className="focus:bg-white/10 focus:text-[#d1ac34] cursor-pointer"
                                 >
                                   {item.category}
                                 </SelectItem>
