@@ -9,6 +9,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Define TypeScript interfaces for your JSON structure
 interface FAQItem {
@@ -45,17 +52,47 @@ export default function FAQSection() {
                 >
                     <h2 className="text-4xl font-bold mb-10 text-white text-center">Frequently Asked Questions</h2>
                     <div className="flex flex-col md:flex-row gap-10">
-                        {/* Category Navigation */}
-                        <div className="flex md:flex-col overflow-x-auto md:overflow-visible gap-2 md:pb-0 min-w-50 border border-white/10 bg-white/5 rounded-2xl">
-                        {data.map((item) => (
-                            <CategoryItem
-                            key={item.category}
-                            label={item.category}
-                            isActive={activeCategory === item.category}
-                            onClick={() => setActiveCategory(item.category)}
-                            />
-                        ))}
+                      {/* --- NAVIGATION AREA --- */}
+                      {/* We use w-full on mobile, and fixed width on desktop */}
+                      <div className="w-full md:w-64">
+
+                        {/* 1. MOBILE: Dropdown (Visible < md, Hidden >= md) */}
+                        <div className="block md:hidden">
+                          <Select 
+                            value={activeCategory} 
+                            onValueChange={setActiveCategory}
+                          >
+                            <SelectTrigger className="w-full bg-white/5 border-white/10 text-white h-12 rounded-xl focus:ring-offset-0 focus:ring-0">
+                              <SelectValue placeholder="Select Category" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-[#1A1A1A] border-white/10 text-white">
+                              {data.map((item) => (
+                                <SelectItem 
+                                  key={item.category} 
+                                  value={item.category}
+                                  className="focus:bg-white/10 focus:text-[#d1ac34] cursor-pointer"
+                                >
+                                  {item.category}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </div>
+
+                        {/* 2. DESKTOP: Sidebar List (Hidden < md, Visible >= md) */}
+                        {/* I moved the border/bg styles here so they don't affect the mobile dropdown wrapper */}
+                        <div className="hidden md:flex flex-col gap-2 p-2 border border-white/10 bg-white/5 rounded-2xl">
+                          {data.map((item) => (
+                            <CategoryItem
+                              key={item.category}
+                              label={item.category}
+                              isActive={activeCategory === item.category}
+                              onClick={() => setActiveCategory(item.category)}
+                            />
+                          ))}
+                        </div>
+
+                      </div>
 
                         {/* Accordion Questions */}
                         <div className="flex-1">
