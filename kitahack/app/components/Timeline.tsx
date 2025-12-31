@@ -14,7 +14,7 @@ const colors = {
 const events = [
   { title: "Info Session", date: "3rd Jan 2026", type: "Kickoff", color: colors.blue, details: "Join us for the grand reveal of the problem statements and meet the mentors." },
   { title: "Registration Opens", date: "4th-18th Jan", type: "Launch", color: colors.yellow, details: "Secure your spot!" },
-  { title: "Workshop 1: Web Dev", date: "31st Jan 2026", type: "Workshop", color: colors.green, details: "Intro to React, Next.js, and Tailwind CSS. Zero to Hero." },
+  { title: "Workshop 1: Web Dev", date: "31st Jan 2026", type: "Workshop", color: colors.green, details: "Intro to React, Next.js, and Tailwind CSS." },
   { title: "Workshop 2: App Dev", date: "1st Feb 2026", type: "Workshop", color: colors.green, details: "Building your first mobile app with Android Studio and Kotlin." },
   { title: "Workshop 3: Firebase", date: "7th Feb 2026", type: "Workshop", color: colors.green, details: "Backend as a Service: Auth, Firestore, and Cloud Functions." },
   { title: "Workshop 4: Flutter", date: "8th Feb 2026", type: "Workshop", color: colors.green, details: "Cross-platform development magic with Flutter and Dart." },
@@ -25,8 +25,8 @@ const events = [
   { title: "Evaluation Period", date: "1st-7th Mar", type: "Judging", color: colors.blue, details: "Our panel of industry experts will review all submissions." },
   { title: "Top 10 Finalists", date: "9th Mar 2026", type: "Result", color: colors.yellow, details: "The best 10 teams will be announced to move to the final round." },
   { title: "Mentoring Session", date: "10th-17th Mar", type: "Mentorship", color: colors.blue, details: "1-on-1 sessions with Google Experts to polish your final product." },
-  { title: "Pitch Perfect", date: "TBD", type: "Workshop", color: colors.green, details: "Master the art of the pitch. Learn how to sell your idea in 3 minutes." },
-  { title: "Demo Day", date: "29th Mar 2026", type: "Grand Finale", location: "Auditorium", color: colors.red, details: "The Grand Finale. Live demos, food, networking, and prizes!" },
+  { title: "Pitch Perfect", date: "TBD", type: "Workshop", color: colors.green, details: "Master the art of the pitch. Learn how to sell your idea." },
+  { title: "Demo Day", date: "29th Mar 2026", type: "Grand Finale", location: "Sunway Art Gallery", color: colors.red, details: "The Grand Finale. Live demos, food, networking, and prizes!" },
 ];
 
 export default function Timeline() {
@@ -75,7 +75,7 @@ export default function Timeline() {
 
 useEffect(() => {
   const generateStars = () => {
-    // INCREASED to 40 stars
+    // REDUCED to 20 stars (was 40)
     return Array.from({ length: 20 }).map(() => ({
       // STARTS at 15% to avoid overlapping the title
       top: `${Math.random() * 85 + 15}%`, 
@@ -119,11 +119,152 @@ useEffect(() => {
   // 4. ATOM SPIN (LINKED TO SCROLL)
   const atomRotate = useTransform(scrollYProgress, [0, 1], [0, 720]);
 
-  // STEM HEIGHT: Kept compact (20px mobile) to keep top cards away from header
-  const stemHeight = isMobile ? "20px" : "50px"; 
+  // STEM HEIGHT: Increased to 50px on mobile to fill vertical space
+  const stemHeight = isMobile ? "50px" : "80px"; 
 
-  // AXIS POSITION: Moved lower on mobile so timeline ends nearer bottom and reduces empty space
-  const axisPosition = isMobile ? "50%" : "60%";
+  // AXIS POSITION: Centered at 50%
+  const axisPosition = "50%";
+
+  if (isMobile) {
+    return (
+      <section className="relative min-h-screen bg-[#0A0A0A] py-12 px-4 overflow-hidden">
+         {/* Background Stars for Mobile */}
+         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            {/* Removed the grid background div here */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#0F0F0F] to-[#050505]" />
+             {stars.slice(0, 10).map((star, i) => (
+                <div 
+                  key={i}
+                  className="absolute opacity-40 animate-pulse"
+                  style={{ top: star.top, left: `${Math.random() * 100}%` }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" style={{ animationDuration: star.duration }}>
+                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" fill="white" />
+                  </svg>
+                </div>
+              ))}
+         </div>
+
+         {/* Mobile Spinning Atom Background */}
+         <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-30">
+            <motion.div
+              style={{ perspective: "1000px" }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="relative w-[300px] h-[300px]"
+            >
+               <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full mix-blend-screen" />
+               <svg className="w-full h-full" viewBox="0 0 320 320" style={{ filter: 'drop-shadow(0 0 20px rgba(59, 132, 247, 0.5))' }}>
+                  <circle cx="160" cy="160" r="25" fill="white" fillOpacity="0.9" />
+                  <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#3b84f7" strokeWidth="4" />
+                  <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#cb5c6d" strokeWidth="4" transform="rotate(60 160 160)" />
+                  <ellipse cx="160" cy="160" rx="110" ry="50" fill="none" stroke="#47ad7a" strokeWidth="4" transform="rotate(120 160 160)" />
+               </svg>
+            </motion.div>
+         </div>
+
+         {/* Mobile Title (Box Removed) */}
+         <div className="relative z-10 text-center mb-12">
+            <h1 className="text-4xl font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#3b84f7] via-[#cb5c6d] to-[#d1ac34]">
+              TIMELINE
+            </h1>
+            <div className="h-1 w-20 mx-auto mt-2 rounded-full bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+         </div>
+
+         {/* Vertical Timeline Container */}
+         <div className="relative z-10 max-w-md mx-auto space-y-8">
+            {/* Vertical Line */}
+            <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#3b84f7] via-[#cb5c6d] to-[#d1ac34] opacity-30" />
+
+            {events.map((event, index) => (
+              <div key={index} className="relative pl-12">
+                {/* Dot */}
+                <div 
+                  className="absolute left-[13px] top-6 w-3 h-3 rounded-full border-2 bg-[#0F0F0F] -translate-x-1/2 z-20"
+                  style={{ borderColor: event.color, boxShadow: `0 0 10px ${event.color}` }}
+                />
+                
+                {/* Card */}
+                <div 
+                  onClick={() => setSelectedEvent(event)}
+                  className="bg-[#111] border border-white/10 rounded-xl p-5 shadow-lg active:scale-95 transition-transform"
+                  style={{ borderColor: `${event.color}40` }}
+                >
+                  <div className="flex justify-between items-start mb-2">
+                    {/* Glowing Type Badge */}
+                    <span 
+                      className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border shadow-[0_0_10px_currentColor]"
+                      style={{ 
+                        color: "#fff", 
+                        borderColor: event.color, 
+                        backgroundColor: event.color 
+                      }}
+                    >
+                      {event.type}
+                    </span>
+                    <span className="text-xs text-gray-400 font-mono">{event.date}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">{event.title}</h3>
+                  <p className="text-xs text-gray-400 line-clamp-2">{event.details}</p>
+                  {event.location && (
+                    <div className="mt-3 flex items-center text-xs text-gray-500">
+                      <span>📍 {event.location}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+         </div>
+
+         {/* Mobile Modal */}
+         <AnimatePresence>
+            {selectedEvent && (
+                <motion.div 
+                    className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setSelectedEvent(null)}
+                >
+                    <motion.div 
+                        className="bg-[#151515] border border-white/10 w-full max-w-sm rounded-2xl p-6 relative overflow-hidden"
+                        initial={{ y: "100%" }}
+                        animate={{ y: 0 }}
+                        exit={{ y: "100%" }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#3b84f7] via-[#cb5c6d] to-[#d1ac34]" />
+                        <span 
+                          className="inline-block mb-3 text-xs font-bold uppercase tracking-wider px-2 py-1 rounded border shadow-[0_0_10px_currentColor]"
+                          style={{ 
+                            color: "#fff", 
+                            borderColor: selectedEvent.color, 
+                            backgroundColor: selectedEvent.color 
+                          }}
+                        >
+                          {selectedEvent.type}
+                        </span>
+                        <h2 className="text-2xl font-bold text-white mb-2">{selectedEvent.title}</h2>
+                        <div className="flex flex-col gap-1 mb-4 text-sm text-gray-400 font-mono">
+                           <p>🗓 {selectedEvent.date}</p>
+                           {selectedEvent.location && <p>📍 {selectedEvent.location}</p>}
+                        </div>
+                        <p className="text-gray-300 text-sm leading-relaxed border-t border-white/10 pt-4">
+                          {selectedEvent.details}
+                        </p>
+                        <button 
+                          className="w-full mt-6 py-3 bg-white/10 rounded-lg text-white font-bold text-sm"
+                          onClick={() => setSelectedEvent(null)}
+                        >
+                          Close
+                        </button>
+                    </motion.div>
+                </motion.div>
+            )}
+         </AnimatePresence>
+      </section>
+    );
+  }
 
   return (
     <section ref={targetRef} className="relative h-[200vh] md:h-[500vh] bg-[#0A0A0A]">
@@ -157,7 +298,7 @@ useEffect(() => {
         {/* --- BACKGROUND LAYERS --- */}
         <div className="absolute inset-0 z-0 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#0F0F0F] to-[#050505]" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+            {/* REMOVED GRID HERE by deleting the grid div that was previously present */}
 
              {/* Parallax Stars */}
              <motion.div 
@@ -196,7 +337,7 @@ useEffect(() => {
         <div 
             className="absolute w-full z-10 pointer-events-none flex justify-center" 
             style={{ 
-                top: axisPosition,             // <--- 1. Locks vertically to the track line (60% or 70%)
+                top: axisPosition,             // <--- 1. Locks vertically to the track line
                 transform: "translateY(-50%)", // <--- 2. Centers the atom exactly on that line
                 perspective: "1000px" 
             }}
@@ -244,11 +385,10 @@ useEffect(() => {
         {/* --- CONTENT --- */}
         <div className="relative z-20 w-full h-full">
             
-            {/* CENTERED TITLE - Slightly smaller text on mobile */}
+            {/* CENTERED TITLE - Size reduced to text-3xl on mobile to prevent overlap */}
             <div className="absolute top-6 left-0 right-0 z-40 flex flex-col items-center justify-center pointer-events-none">
               <motion.h1 
-                // FIX: Removed drop-shadow, kept original rainbow gradient text
-                className="text-5xl md:text-7xl font-black uppercase tracking-widest leading-tight text-center"
+                className="text-3xl md:text-7xl font-black uppercase tracking-widest leading-tight text-center"
                 style={{ 
                     backgroundImage: `linear-gradient(90deg, ${colors.blue}, ${colors.red}, ${colors.yellow}, ${colors.blue})`,
                     backgroundSize: "200% auto",
@@ -273,7 +413,7 @@ useEffect(() => {
             <motion.div 
                 ref={containerRef}
                 style={{ x, top: axisPosition }} 
-                className="absolute left-0 flex gap-44 md:gap-96 pl-30 md:pl-60 pr-24 md:pr-96 items-center w-max -translate-y-1/2"
+                className="absolute left-0 flex gap-44 md:gap-96 pl-24 md:pl-60 pr-24 md:pr-96 items-center w-max -translate-y-1/2"
             >
               {events.map((event, index) => {
                 const isTop = index % 2 === 0;
