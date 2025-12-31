@@ -92,6 +92,7 @@ useEffect(() => {
     setStars(generateStars());
   });
 
+  //
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') setSelectedEvent(null);
   };
