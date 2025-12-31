@@ -62,7 +62,36 @@ export default function FAQSection() {
                             value={activeCategory} 
                             onValueChange={setActiveCategory}
                           >
-                            <SelectTrigger className="w-full bg-white/5 border-white/10 text-white h-12 rounded-xl focus:ring-offset-0 focus:ring-0">
+                            <SelectTrigger 
+                              className="
+                                w-full h-14 rounded-xl text-base font-medium transition-all duration-300
+                                
+                                /* BACKGROUND: Solid Dark */
+                                bg-[#0F0F0F] 
+                                
+                                /* BORDER: Blue (The primary brand color) */
+                                border border-[#3B84F7]/30
+                                
+                                /* TEXT: White */
+                                text-white 
+                                
+                                /* --- DUAL GLOW: Blue & Green --- */
+                                /* Left: Blue | Right: Green */
+                                shadow-[-5px_5px_25px_rgba(59,132,247,0.25),5px_-5px_25px_rgba(71,173,122,0.25)]
+                                
+                                /* HOVER STATE: Brighter Border & Stronger Glow */
+                                hover:border-[#3B84F7]
+                                hover:shadow-[-5px_5px_35px_rgba(59,132,247,0.4),5px_-5px_35px_rgba(71,173,122,0.4)]
+                                
+                                /* FOCUS STATE */
+                                focus:ring-0 focus:ring-offset-0
+                                focus:border-[#3B84F7]
+                                
+                                /* ICON: Blue to match the border */
+                                [&>svg]:text-[#3B84F7]
+                                [&>svg]:opacity-100
+                              "
+                            >
                               <SelectValue placeholder="Select Category" />
                             </SelectTrigger>
                             <SelectContent className="bg-[#1A1A1A] border-white/10 text-white">
@@ -70,7 +99,7 @@ export default function FAQSection() {
                                 <SelectItem 
                                   key={item.category} 
                                   value={item.category}
-                                  className="focus:bg-white/10 focus:text-[#d1ac34] cursor-pointer"
+                                  className="focus:bg-white/10 focus:text-[#3B84F7] cursor-pointer"
                                 >
                                   {item.category}
                                 </SelectItem>
@@ -91,7 +120,6 @@ export default function FAQSection() {
                             />
                           ))}
                         </div>
-
                       </div>
 
                         {/* Accordion Questions */}
