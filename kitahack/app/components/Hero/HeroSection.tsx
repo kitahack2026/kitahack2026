@@ -27,7 +27,7 @@ const HeroSection: React.FC = () => {
     };
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center px-4 py-16 md:py-12 overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center px-4 py-16 md:py-12 pt-24 md:pt-32 overflow-hidden">
             {/* Background with gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]" />
 
