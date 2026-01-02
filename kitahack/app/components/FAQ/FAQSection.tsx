@@ -1,59 +1,57 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import faqData from "./faqData.json";
-import FAQMobileSelect from "./FAQMobileSelect";
-import FAQDesktopSidebar from "./FAQDesktopSidebar";
-import FAQAccordion from "./FAQAccordion";
+import { useState } from 'react';
+import faqData from './faqData.json';
+import FAQMobileSelect from './FAQMobileSelect';
+import FAQDesktopSidebar from './FAQDesktopSidebar';
+import FAQAccordion from './FAQAccordion';
+import { SectionWrapper } from '@/components/ui/section-wrapper';
+import { SectionHeading } from '@/components/ui/section-heading';
+import type { FAQCategory } from '@/types';
 
-// Define shared types (or move to a types.ts file)
-export interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-}
-
-export interface FAQCategory {
-  category: string;
-  items: FAQItem[];
-}
-
+/**
+ * FAQSection Component
+ * 
+ * Displays frequently asked questions organized by category.
+ * Features responsive design with mobile dropdown and desktop sidebar navigation.
+ */
 export default function FAQSection() {
-  const data = faqData as FAQCategory[];
-  const [activeCategory, setActiveCategory] = useState(data[0].category);
+    const data = faqData as FAQCategory[];
+    const [activeCategory, setActiveCategory] = useState(data[0].category);
 
-  // Find the items for the currently selected category
-  const activeData = data.find((item) => item.category === activeCategory);
+    // Find the items for the currently selected category
+    const activeData = data.find((item) => item.category === activeCategory);
 
-  return (
-    <section id="faq" className="max-w-6xl mx-auto py-32 px-4">
-      <div className="w-full md:relative md:bg-[#1A1A1A] md:border md:border-[#FFFFFF80] md:rounded-[32px] md:p-12 md:overflow-hidden md:shadow-[-20px_20px_100px_rgba(59,132,247,0.5),20px_-20px_100px_rgba(71,173,122,0.5)]">
-        
-        <h2 className="text-4xl font-bold mb-10 text-white text-center">Frequently Asked Questions</h2>
+    return (
+        <SectionWrapper id='faq' padding='large' ariaLabelledby='faq-heading'>
+            <div className='w-full md:relative md:border md:border-white/50 md:rounded-[32px] md:p-12 md:overflow-hidden md:shadow-[-20px_20px_100px_rgba(59,132,247,0.5),20px_-20px_100px_rgba(71,173,122,0.5)] bg-kitahack-bg-card'>
+                <SectionHeading id='faq-heading'>
+                    Frequently Asked Questions
+                </SectionHeading>
 
-        <div className="flex flex-col md:flex-row gap-10">
-          
-          {/* NAVIGATION COLUMN */}
-          <div className="w-full md:w-64">
-            <FAQMobileSelect 
-              categories={data} 
-              activeCategory={activeCategory} 
-              onChange={setActiveCategory} 
-            />
-            <FAQDesktopSidebar 
-              categories={data} 
-              activeCategory={activeCategory} 
-              onChange={setActiveCategory} 
-            />
-          </div>
+                <div className='flex flex-col md:flex-row gap-10'>
+                    {/* Navigation Column */}
+                    <nav className='w-full md:w-64' aria-label='FAQ categories'>
+                        <FAQMobileSelect
+                            categories={data}
+                            activeCategory={activeCategory}
+                            onChange={setActiveCategory}
+                        />
+                        <FAQDesktopSidebar
+                            categories={data}
+                            activeCategory={activeCategory}
+                            onChange={setActiveCategory}
+                        />
+                    </nav>
 
-          {/* QUESTIONS COLUMN */}
-          <div className="flex-1">
-            {activeData && <FAQAccordion items={activeData.items} />}
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
+                    {/* Questions Column */}
+                    <div className='flex-1'>
+                        {activeData && (
+                            <FAQAccordion items={activeData.items} />
+                        )}
+                    </div>
+                </div>
+            </div>
+        </SectionWrapper>
+    );
 }

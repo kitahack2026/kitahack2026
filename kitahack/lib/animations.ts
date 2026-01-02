@@ -28,4 +28,3 @@ export const animations = {
     fadeIn: 'animate-in fade-in duration-500',
     slideUp: 'animate-in slide-in-from-bottom-4 duration-500',
 } as const;
-
