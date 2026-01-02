@@ -21,6 +21,7 @@ function Organizers() {
       reverse={true}
       partnerList={organizers}
       duration={40}
+      lightTheme={true}
     />
   );
 }
