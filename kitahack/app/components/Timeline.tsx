@@ -24,69 +24,66 @@ const colors = {
 const events: TimelineEvent[] = [
     {
         title: 'Info Session',
-        date: '3rd Jan 2026',
+        date: '9th Jan 2026',
         type: 'Kickoff',
         color: colors.blue,
         details: 'Join us for the grand reveal of the problem statements.',
     },
     {
         title: 'Registration Opens',
-        date: '4th-18th Jan',
+        date: '9th-18th Jan',
         type: 'Launch',
         color: colors.yellow,
         details: 'Secure your spot!',
     },
     {
-        title: 'Workshop 1: Web Dev',
-        date: '31st Jan 2026',
+        title: 'Workshop 1: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details: 'Intro to React, Next.js, and Tailwind CSS.',
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
-        title: 'Workshop 2: App Dev',
-        date: '1st Feb 2026',
+        title: 'Workshop 2: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details:
-            'Building your first mobile app with Android Studio and Kotlin.',
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
-        title: 'Workshop 3: Firebase',
-        date: '7th Feb 2026',
+        title: 'Workshop 3: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details: 'Backend as a Service: Auth, Firestore, and Cloud Functions.',
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
-        title: 'Workshop 4: Flutter',
-        date: '8th Feb 2026',
+        title: 'Workshop 4: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details: 'Cross-platform development magic with Flutter and Dart.',
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
-        title: 'Workshop 5: Gemini API',
-        date: '14th Feb 2026',
+        title: 'Workshop 5: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details:
-            "Integrate AI into your hacks using Google's latest Gemini models.",
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
-        title: 'Workshop 6: Cloud Platform',
-        date: '15th Feb 2026',
+        title: 'Workshop 6: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details:
-            'Deploying and scaling your solution on Google Cloud Platform.',
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
-        title: 'Workshop 7: From Zero To Hero',
-        date: 'TBD',
+        title: 'Workshop 7: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details: 'Past champions are here to share their experience!',
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
         title: 'Round 1 Deadline',
@@ -118,11 +115,11 @@ const events: TimelineEvent[] = [
         details: 'Sessions with experts to polish your final product.',
     },
     {
-        title: 'Pitch Perfect',
-        date: 'TBD',
+        title: 'Workshop 8: TBA',
+        date: 'TBA',
         type: 'Workshop',
         color: colors.green,
-        details: 'Master the art of the pitch. Learn how to sell your idea.',
+        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
     },
     {
         title: 'Demo Day',
@@ -253,7 +250,7 @@ export default function Timeline() {
     // --- MOBILE LAYOUT ---
     if (isMobile) {
         return (
-            <section className='relative min-h-screen bg-kitahack-bg-dark py-16 px-4 overflow-hidden pt-24 mb-16 md:mb-24'>
+            <section className='relative min-h-screen bg-kitahack-bg-dark py-16 px-4 overflow-hidden pt-24'>
                 {/* Background Stars for Mobile */}
                 <div className='absolute inset-0 z-0 overflow-hidden pointer-events-none'>
                     <div className='absolute inset-0 bg-gradient-to-b from-[#050505] via-kitahack-bg-darker to-[#050505]' />
@@ -357,7 +354,7 @@ export default function Timeline() {
                         <div key={index} className='relative pl-12'>
                             {/* Dot */}
                             <div
-                                className='absolute left-[13px] top-6 w-3 h-3 rounded-full border-2 bg-kitahack-bg-darker -translate-x-1/2 z-20'
+                                className='absolute left-[17px] top-6 w-3 h-3 rounded-full border-2 bg-kitahack-bg-darker -translate-x-1/2 z-20'
                                 style={{
                                     borderColor: event.color,
                                     boxShadow: `0 0 10px ${event.color}`,
@@ -390,9 +387,12 @@ export default function Timeline() {
                                 <h3 className='text-lg font-bold text-white mb-1'>
                                     {event.title}
                                 </h3>
-                                <p className='text-xs text-gray-400 line-clamp-2'>
-                                    {event.details}
-                                </p>
+                                {/* Later can remove != 'Workshop' when we get details*/}
+                                {event.type !== 'Workshop' && (
+                                    <p className='text-xs text-gray-400 line-clamp-2'>
+                                        {event.details}
+                                    </p>
+                                )}
                                 {event.location && (
                                     <div className='mt-3 flex items-center text-xs text-gray-500'>
                                         <span>📍 {event.location}</span>
@@ -463,7 +463,7 @@ export default function Timeline() {
     return (
         <section
             ref={targetRef}
-            className='relative h-[200vh] md:h-[500vh] bg-kitahack-bg-dark mb-16 md:mb-24'
+            className='relative h-[200vh] md:h-[500vh] bg-kitahack-bg-dark'
         >
             {/* Global Defs for Gradients */}
             <svg width='0' height='0' className='absolute' aria-hidden='true'>
