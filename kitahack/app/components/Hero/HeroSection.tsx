@@ -44,20 +44,22 @@ export default function HeroSection() {
                     {/* Title with Gradient */}
                     <h1 className='text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight'>
                         <span className='text-kitahack-gradient animate-gradient'>
-                            KitaHack 2026
+                            Building technology that matters
                         </span>
                     </h1>
 
                     {/* Description */}
-                    <p className='text-sm md:text-lg lg:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed px-2 md:px-4'>
-                        GDGoC KitaHack 2026 is an open-ended hackathon designed
-                        to enable students to conceptualise and build technology
-                        solutions aligned with the United Nations Sustainable
-                        Development Goals. Participants apply AI and Google
-                        technologies through guided workshops, mentorship, and
-                        collaborative development, preparing them for real-world
-                        problem-solving.
-                    </p>
+                    <div className='text-sm md:text-lg lg:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed px-2 md:px-4 space-y-4 text-justify'>
+                        <p>
+                            KitaHack 2026 is an annual hackathon hosted by Google Developer Groups on Campus Malaysia. This year, we're challenging students to create AI-powered solutions addressing the UN's Sustainable Development Goals.
+                        </p>
+                        <p>
+                            Over the course of three months, you'll master Google's technology stack, from Firebase to Gemini API, through hands-on workshops across seven universities. Learn from Google Developer Experts. Get mentored by industry professionals. Collaborate with Malaysia's brightest innovators.
+                        </p>
+                        <p>
+                            Walk away with a complete, deployable solution ready for both KitaHack and Google's Solution Challenge.
+                        </p>
+                    </div>
 
                     {/* Countdown Timer */}
                     <div className='py-4 md:py-8'>
