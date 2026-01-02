@@ -8,7 +8,7 @@ export const aboutData: AboutCardData[] = [
     {
         id: 1,
         title: "About KitaHack",
-        description: "KitaHack 2026 is an annual hackathon hosted by Google Developer Groups on Campus Malaysia. This year, we're challenging students to create AI-powered solutions addressing the UN's Sustainable Development Goals. Over the course of three months, you'll master Google's technology stack, from Firebase to Gemini API, through hands-on workshops across seven universities. Learn from Google Developer Experts. Get mentored by industry professionals. Collaborate with Malaysia's brightest innovators. Walk away with a complete, deployable solution ready for both KitaHack and Google's Solution Challenge.",
+        description: "Launched in 2021, KitaHack is a nationwide collaboration among all Google Developer Groups on Campus (GDGOC) chapters in Malaysia. More than just a hackathon, KitaHack serves as a platform for dedicated and talented individuals to develop their skills, tackle real-world AI and SDG-aligned challenges, and prepare participants for the Google Solution Challenge.",
         imagePath: "/about-kitahack.png",
         imageAlt: "KitaHack 2026 Logo",
         gradientFrom: "#47AD7A", // Green
