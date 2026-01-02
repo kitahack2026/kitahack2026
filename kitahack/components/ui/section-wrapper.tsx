@@ -1,16 +1,20 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { ui } from '@/lib/ui-constants';
+import type { SectionWrapperProps } from '@/types';
 
-interface SectionWrapperProps {
-    children: React.ReactNode;
-    id?: string;
-    className?: string;
-    padding?: 'default' | 'large' | 'small';
-    container?: 'default' | 'wide' | 'narrow';
-    ariaLabelledby?: string;
-}
-
+/**
+ * SectionWrapper Component
+ * 
+ * A standardized wrapper for page sections that provides
+ * consistent padding, container widths, and accessibility features.
+ * 
+ * @example
+ * <SectionWrapper id="about" padding="large" container="wide">
+ *   <SectionHeading>About Us</SectionHeading>
+ *   <p>Content here...</p>
+ * </SectionWrapper>
+ */
 export function SectionWrapper({
     children,
     id,
@@ -43,4 +47,3 @@ export function SectionWrapper({
         </section>
     );
 }
-

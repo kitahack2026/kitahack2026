@@ -1,14 +1,18 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
+import type { SectionHeadingProps } from '@/types';
 
-interface SectionHeadingProps {
-    children: React.ReactNode;
-    id?: string;
-    className?: string;
-    withUnderline?: boolean;
-    as?: 'h1' | 'h2' | 'h3';
-}
-
+/**
+ * SectionHeading Component
+ * 
+ * A standardized heading component for page sections with
+ * optional decorative underline and configurable heading level.
+ * 
+ * @example
+ * <SectionHeading id="about-heading" as="h2">
+ *   About Us
+ * </SectionHeading>
+ */
 export function SectionHeading({
     children,
     id,
@@ -28,9 +32,11 @@ export function SectionHeading({
                 {children}
             </Component>
             {withUnderline && (
-                <div className='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-4' />
+                <div 
+                    className='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mt-4' 
+                    aria-hidden='true'
+                />
             )}
         </div>
     );
 }
-

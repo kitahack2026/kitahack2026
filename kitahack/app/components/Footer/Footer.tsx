@@ -1,17 +1,20 @@
-import React from 'react';
-import Link from 'next/link';
-import { SOCIAL_LINKS } from '@/constants';
-import { typography } from '@/lib/typography';
-import { animations } from '@/lib/animations';
-import { ui } from '@/lib/ui-constants';
+'use client';
 
+import Link from 'next/link';
+import { SOCIAL_LINKS, NAV_ITEMS } from '@/constants';
+import { typography } from '@/lib/typography';
+import { animation } from '@/lib/design-system';
+
+/**
+ * Social media link configuration
+ */
 interface SocialLink {
     name: string;
     href: string;
     icon: React.ReactNode;
 }
 
-const socialLinks: SocialLink[] = [
+const SOCIAL_LINKS_CONFIG: SocialLink[] = [
     {
         name: 'LinkedIn',
         href: SOCIAL_LINKS.LINKEDIN,
@@ -66,48 +69,50 @@ const socialLinks: SocialLink[] = [
     },
 ];
 
-const quickLinks = [
-    { name: 'About', href: '/#about' },
-    { name: 'Technologies', href: '/#google-tech' },
-    { name: 'Judging Criteria', href: '/#judging' },
-    { name: 'FAQs', href: '/#faq' },
-];
-
+/**
+ * Footer Component
+ * 
+ * Site-wide footer with branding, navigation links, and social media links.
+ * Follows accessibility best practices with proper ARIA labels.
+ */
 export default function Footer() {
     return (
-        <footer className='relative bg-kitahack-bg-darker border-t border-gray-800/50'>
-            {/* Decorative gradient borders at top */}
-            <div className='absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent' />
-            <div className='absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent opacity-50' />
+        <footer 
+            className='relative bg-kitahack-bg-darker border-t border-gray-800/50'
+            role='contentinfo'
+        >
+            {/* Decorative gradient border */}
+            <div 
+                className='absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent' 
+                aria-hidden='true'
+            />
 
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16'>
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8'>
                     {/* Brand Section */}
                     <div className='text-center md:text-left'>
-                        <div className='mb-4'>
-                            <h3 className='text-2xl md:text-3xl font-bold mb-2'>
-                                <span className='text-kitahack-gradient'>
-                                    KitaHack
-                                </span>
-                            </h3>
-                            <p className={`${typography.bodySmall} text-gray-500`}>
-                                Building the future with AI and Google technologies
-                            </p>
-                        </div>
+                        <h2 className='text-2xl md:text-3xl font-bold mb-2'>
+                            <span className='text-kitahack-gradient'>
+                                KitaHack
+                            </span>
+                        </h2>
+                        <p className={`${typography.bodySmall} text-gray-500`}>
+                            Building the future with AI and Google technologies
+                        </p>
                     </div>
 
                     {/* Quick Links */}
                     <div className='text-center md:text-left'>
-                        <h4 className={`${typography.label} mb-4 text-white`}>
+                        <h3 className={`${typography.label} mb-4 text-white`}>
                             Quick Links
-                        </h4>
+                        </h3>
                         <nav aria-label='Footer navigation'>
                             <ul className='space-y-2'>
-                                {quickLinks.map((link) => (
+                                {NAV_ITEMS.map((link) => (
                                     <li key={link.name}>
                                         <Link
                                             href={link.href}
-                                            className={`${typography.bodySmall} ${animations.transition.default} hover:text-blue-400 ${animations.focus.ringThin}`}
+                                            className={`${typography.bodySmall} ${animation.transition.default} hover:text-blue-400 ${animation.focus.visible}`}
                                         >
                                             {link.name}
                                         </Link>
@@ -119,30 +124,30 @@ export default function Footer() {
 
                     {/* Social Links */}
                     <div className='text-center md:text-left'>
-                        <h4 className={`${typography.label} mb-4 text-white`}>
+                        <h3 className={`${typography.label} mb-4 text-white`}>
                             Connect With Us
-                        </h4>
-                        <div className='flex justify-center md:justify-start gap-4'>
-                            {socialLinks.map((social) => (
-                                <Link
-                                    key={social.name}
-                                    href={social.href}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                    className={`p-2 rounded-lg ${animations.transition.default} ${animations.hover.scale} ${animations.focus.ringThin} text-gray-400 hover:text-white hover:bg-gray-800/50`}
-                                    aria-label={`Visit our ${social.name} page`}
-                                >
-                                    {social.icon}
-                                </Link>
+                        </h3>
+                        <ul className='flex justify-center md:justify-start gap-4'>
+                            {SOCIAL_LINKS_CONFIG.map((social) => (
+                                <li key={social.name}>
+                                    <Link
+                                        href={social.href}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className={`block p-2 rounded-lg ${animation.transition.default} ${animation.hover.scale} ${animation.focus.visible} text-gray-400 hover:text-white hover:bg-gray-800/50`}
+                                        aria-label={`Follow us on ${social.name}`}
+                                    >
+                                        {social.icon}
+                                    </Link>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </div>
                 </div>
 
-                {/* Divider */}
+                {/* Bottom Bar */}
                 <div className='border-t border-gray-800/50 pt-8 mt-8'>
                     <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
-                        {/* Copyright */}
                         <div className='text-center md:text-left'>
                             <p className={`${typography.labelSmall} text-gray-500`}>
                                 © 2026 GDGoC Malaysia. All rights reserved.
@@ -152,10 +157,9 @@ export default function Footer() {
                             </p>
                         </div>
 
-                        {/* Brand Logo with Gradient */}
                         <div className='flex items-center gap-2'>
                             <span className='text-kitahack-gradient text-lg font-bold'>
-                                + 2026 +
+                                ✦ 2026 ✦
                             </span>
                         </div>
                     </div>
@@ -164,4 +168,3 @@ export default function Footer() {
         </footer>
     );
 }
-

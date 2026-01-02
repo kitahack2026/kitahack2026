@@ -50,12 +50,4 @@ export const ui = {
         accent: 'text-blue-500',
         accentYellow: 'text-[#d1ac34]',
     },
-
-    // Color Values (for inline styles)
-    colors: {
-        accentBlue: '#3b84f7',
-        accentGreen: '#47ad7a',
-        accentRed: '#cb5c6d',
-        accentYellow: '#d1ac34',
-    },
 } as const;
