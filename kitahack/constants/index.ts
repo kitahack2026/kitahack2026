@@ -38,7 +38,7 @@ export const COLORS = {
 
 // Navigation Items
 export const NAV_ITEMS = [
-    { name: 'About', href: '/#about' },
+    { name: 'About', href: '/#about' }, 
     { name: 'Google Technologies', href: '/#google-tech' },
     { name: 'Speakers', href: '/speakers' },
     { name: 'Criteria', href: '/#judging' },
