@@ -44,7 +44,7 @@ export default function HeroSection() {
                     {/* Title with Gradient */}
                     <h1 className='text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight'>
                         <span className='text-kitahack-gradient animate-gradient'>
-                            Building technology that matters
+                            Building Technology That Matters
                         </span>
                     </h1>
 
