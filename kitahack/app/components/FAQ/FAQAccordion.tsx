@@ -50,7 +50,14 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
                         {faq.question}
                     </AccordionTrigger>
                     <AccordionContent className='text-zinc-400 text-sm md:text-base leading-relaxed pb-4'>
-                        {faq.answer}
+                        <div 
+                            dangerouslySetInnerHTML={{ 
+                                __html: faq.answer.replace(
+                                    /(https?:\/\/[^\s]+)/g, 
+                                    '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline transition-colors">$1</a>'
+                                )
+                            }} 
+                        />
                     </AccordionContent>
                 </AccordionItem>
             ))}

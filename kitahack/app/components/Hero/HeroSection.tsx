@@ -1,14 +1,13 @@
-'use client';
+"use client";
 
 import React from 'react';
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import { Button } from '@/components/ui/button';
-import { EVENT_DATES } from '@/constants';
 
 // Dynamically import the client-only CountdownTimer
 const CountdownTimerClient = dynamic(
-    () => import('./CountdownTimer.client'),
-    { ssr: false } // prevent server side render
+  () => import("./CountdownTimer.client"),
+  { ssr: false } // prevent server side render 
 );
 
 /**
@@ -16,8 +15,9 @@ const CountdownTimerClient = dynamic(
  * Main hero section with title, description, countdown timer, and CTA button
  * Follows the Figma design with dark theme and gradient effects
  */
-export default function HeroSection() {
-    const targetDate = EVENT_DATES.REGISTRATION_CLOSES;
+const HeroSection: React.FC = () => {
+    // Target date: January 18th, 2026, 11:59 PM MYT (Registration Closes)
+    const targetDate = new Date('2026-01-18T23:59:59+08:00');
 
     const handleLearnMore = () => {
         const aboutSection = document.getElementById('about');
@@ -27,52 +27,48 @@ export default function HeroSection() {
     };
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center px-4 py-16 md:py-12 pt-24 md:pt-32 overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center px-4 py-16 md:py-12 overflow-hidden">
             {/* Background with gradient */}
-            <div className='absolute inset-0 bg-kitahack-gradient' />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]" />
 
             {/* Subtle grid pattern overlay */}
-            <div className='absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]' />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
 
             {/* Wrapper for glow effect */}
-            <div className='relative z-10 max-w-5xl mx-auto w-full'>
-                {/* Glowing gradient effect */}
-                <div className='absolute -inset-[6px] rounded-[3rem] opacity-90 blur-3xl bg-kitahack-primary-gradient' />
+            <div className="relative z-10 max-w-5xl mx-auto w-full">
+                {/* Glowing gradient effect - ENHANCED for testing */}
+                {/* Previous settings (revert if needed): opacity-70 blur-2xl -inset-[4px] */}
+                <div className="absolute -inset-[6px] rounded-[3rem] bg-gradient-to-r from-[#3B84F7] via-[#47AD7A] via-[#CB5C6D] to-[#D1AC34] opacity-90 blur-3xl" />
 
                 {/* Content Container with Thin White Border and BLACK background */}
-                <div className='relative text-center space-y-6 md:space-y-8 p-6 md:p-12 rounded-[3rem] border border-white bg-black isolate'>
+                <div className="relative text-center space-y-6 md:space-y-8 p-6 md:p-12 rounded-[3rem] border border-white bg-black isolate">
+
                     {/* Title with Gradient */}
-                    <h1 className='text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight'>
-                        <span className='text-kitahack-gradient animate-gradient'>
-                            Building Technology That Matters
+                    <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight">
+                        <span className="bg-gradient-to-r from-[#3B84F7] via-[#47AD7A] via-[#CB5C6D] to-[#D1AC34] bg-clip-text text-transparent animate-gradient">
+                            KitaHack 2026
                         </span>
                     </h1>
 
                     {/* Description */}
-                    <div className='text-sm md:text-lg lg:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed px-2 md:px-4 space-y-4 text-justify'>
-                        <p>
-                            KitaHack 2026 is an annual hackathon hosted by Google Developer Groups on Campus Malaysia. This year, we're challenging students to create AI-powered solutions addressing the UN's Sustainable Development Goals.
-                        </p>
-                        <p>
-                            Over the course of three months, you'll master Google's technology stack, from Firebase to Gemini API, through hands-on workshops across seven universities. Learn from Google Developer Experts. Get mentored by industry professionals. Collaborate with Malaysia's brightest innovators.
-                        </p>
-                        <p>
-                            Walk away with a complete, deployable solution ready for both KitaHack and Google's Solution Challenge.
-                        </p>
-                    </div>
+                    <p className="text-sm md:text-lg lg:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed px-2 md:px-4">
+                        GDGoC KitaHack 2026 is an open-ended hackathon designed to enable students to conceptualise
+                        and build technology solutions aligned with the United Nations Sustainable Development Goals.
+                        Participants apply AI and Google technologies through guided workshops, mentorship, and
+                        collaborative development, preparing them for real-world problem-solving.
+                    </p>
 
                     {/* Countdown Timer */}
-                    <div className='py-4 md:py-8'>
+                    <div className="py-4 md:py-8">
                         <CountdownTimerClient targetDate={targetDate} />
                     </div>
 
                     {/* CTA Button */}
-                    <div className='pt-2 md:pt-4'>
+                    <div className="pt-2 md:pt-4">
                         <Button
                             onClick={handleLearnMore}
-                            size='lg'
-                            className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl'
-                            aria-label='Learn more about KitaHack 2026'
+                            size="lg"
+                            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                         >
                             LEARN MORE
                         </Button>
@@ -81,4 +77,6 @@ export default function HeroSection() {
             </div>
         </section>
     );
-}
+};
+
+export default HeroSection;
