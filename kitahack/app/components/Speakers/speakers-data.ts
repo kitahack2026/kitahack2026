@@ -17,7 +17,7 @@ export const speakers: Speaker[] = [
     },
     {
         name: "Raziq Din",
-        title: "Vice President of Goal Execution (External Affairs) @ IT Society Cyberjaya, Multimedia University",
+        title: "Full Stack Developer at HKL & Software Engineering Lead @ GDGoC MMU",
         workshop: "Quote It Up ! Your First Android App with API Calls",
         bio: "As Director of Tech Career Days 2025 and VP of Goal Execution at IT Society Cyberjaya, Raziq specializes in connecting students with real-world tech opportunities. He brings expertise in front-end development and strategic partnerships with industry leaders. From competing in hackathons to building healthcare solutions, his mentorship focuses on practical skill-building and helping students discover their potential through collaboration and meaningful project work.",
         image: "/speakers/Raziq-Din.png"
