@@ -37,11 +37,11 @@ const events: TimelineEvent[] = [
         details: 'Reserve your spot early and secure your place in the challenge!',
     },
     {
-        title: 'Workshop 1: TBA',
-        date: 'TBA',
+        title: 'Workshop 1: Introduction to Web Development & APIs',
+        date: '31st Jan 2026',
         type: 'Workshop',
         color: colors.green,
-        details: 'An engaging, hands-on session designed to accelerate your skills — details to be announced; stay tuned for program updates.',
+        details: 'Get practical experience creating web interfaces and connecting to third‑party APIs to turn server data into interactive user experiences.',
     },
     {
         title: 'Workshop 2: Quote It Up ! Your First Android App with API Calls',
