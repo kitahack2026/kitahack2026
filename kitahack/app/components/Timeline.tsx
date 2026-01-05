@@ -31,7 +31,7 @@ const events: TimelineEvent[] = [
     },
     {
         title: 'Registration Opens',
-        date: '5th-18th Jan 2026',
+        date: '5th-15th Jan 2026',
         type: 'Launch',
         color: colors.yellow,
         details: 'Reserve your spot early and secure your place in the challenge!',
