@@ -10,7 +10,7 @@ export const EVENT_DATES = {
 
 // External URLs
 export const EXTERNAL_URLS = {
-    RUBRIC: 'https://drive.google.com/drive/u/5/folders/1DXumVRpNUqZzpxHE-O3arWUeodO4htbV',
+    RUBRIC: 'https://docs.google.com/document/d/1QLXIkcXSmAM51N4t5I0TSvjRBewgCMeGwcxuf-3PFio/edit?usp=sharing',
     ANDROID: 'https://developer.android.com',
     FLUTTER: 'https://flutter.dev',
     GOOGLE_CLOUD: 'https://cloud.google.com',
