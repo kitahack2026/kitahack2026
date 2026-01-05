@@ -19,7 +19,7 @@ export const speakers: Speaker[] = [
         name: "Raziq Din",
         title: "Full Stack Developer at HKL & Software Engineering Lead @ GDGoC MMU",
         workshop: "Quote It Up ! Your First Android App with API Calls",
-        bio: "As Director of Tech Career Days 2025 and VP of Goal Execution at IT Society Cyberjaya, Raziq specializes in connecting students with real-world tech opportunities. He brings expertise in front-end development and strategic partnerships with industry leaders. From competing in hackathons to building healthcare solutions, his mentorship focuses on practical skill-building and helping students discover their potential through collaboration and meaningful project work.",
+        bio: "Raziq Din is a Full Stack Developer at Hospital Kuala Lumpur (HKL) and the Software Engineering Lead at GDGoC Multimedia University. He is actively involved in building real-world web applications in the healthcare sector while mentoring student developers in creating impactful, scalable projects. His passion lies in helping others grow as developers by sharing practical skills and industry insights.",
         image: "/speakers/Raziq-Din.png"
     },
     {
