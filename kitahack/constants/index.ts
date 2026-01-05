@@ -38,7 +38,7 @@ export const COLORS = {
 
 // Navigation Items
 export const NAV_ITEMS = [
-    { name: 'About', href: '/#about' }, 
+    { name: 'About', href: '/#about' },
     { name: 'Google Technologies', href: '/#google-tech' },
     { name: 'Speakers', href: '/speakers' },
     { name: 'Criteria', href: '/#judging' },
@@ -49,6 +49,6 @@ export const NAV_ITEMS = [
 export const SOCIAL_LINKS = {
     LINKEDIN: 'https://www.linkedin.com/company/gdgc-malaysia',
     INSTAGRAM: 'https://www.instagram.com/gdgc_malaysia',
-    EMAIL: 'mailto:contact@kitahack.com',
+    EMAIL: 'mailto:sea.dscmalaysia@gmail.com',
 } as const;
 
