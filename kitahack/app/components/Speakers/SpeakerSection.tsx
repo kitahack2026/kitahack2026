@@ -22,13 +22,12 @@ export default function SpeakersSection() {
             {/* Content */}
             <div className='relative z-10'>
                 <SectionHeading id='speakers-heading'>Speakers & Workshops</SectionHeading>
-                
-                <p className="text-sm md:text-lg lg:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed px-2 md:px-4 mb-12 text-center">
-                    Learn from industry experts and community leaders
-                    through hands-on workshops and tech talks.
+
+                <p className="text-sm md:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-2 md:px-4 mb-16 text-center md:text-justify">
+                    Learn from industry experts and community leaders through hands-on workshops and tech talks. Our speakers bring real-world experience and cutting-edge knowledge to help you level up your skills.
                 </p>
 
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2 max-w-6xl mx-auto">
                     {speakers.map((speaker) => (
                         <SpeakerCard
                             key={speaker.name}
