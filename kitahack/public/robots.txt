@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kitahack2026.my/
+
+# Sitemaps
+Sitemap: https://kitahack2026.my/sitemap.xml
