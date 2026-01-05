@@ -1,6 +1,6 @@
 [
   {
-    "category": "KitaHack 2026 General Information",
+    "category": "General",
     "items": [
       {
         "id": "gen1",
@@ -14,43 +14,8 @@
       },
       {
         "id": "gen3",
-        "question": "What are the Prizes for KitaHack 2026?",
-        "answer": "You might be wondering if the prize money is monetary benefit or credits or google merch or all of the above? For that you have to stay tuned to our announcements on Instagram and Discord!"
-      },
-      {
-        "id": "gen4",
-        "question": "When will the Google Solution Challenge 2026?",
-        "answer": "The expectation for the Google Solution Challenge 2026 is to be after May. For more details, we have to wait for Google's Global Team to announce it."
-      },
-      {
-        "id": "gen5",
-        "question": "So which round must we show up physically?",
-        "answer": "All preliminary rounds will be held virtually. Only Demo Day will be held physically for Top 10 Finalists."
-      },
-      {
-        "id": "gen6",
-        "question": "Is there a registration fee?",
-        "answer": "There is no registration fee."
-      },
-      {
-        "id": "gen7",
-        "question": "I am staying in KL. Can I go to APU/Monash for the physical workshop?",
-        "answer": "Nope. The workshops are only open physically for the Host Universities. External students that are interested will be able to join the workshop Virtually."
-      },
-      {
-        "id": "gen8",
-        "question": "Can I know who are the speakers for all the workshops?",
-        "answer": "The speakers of the workshops are GDE's, DevFest Speakers or Experienced Developers. We will announce the speaker info when the posts for the workshops are up!"
-      },
-      {
-        "id": "gen9",
-        "question": "When is the deadline for the Registration Form?",
-        "answer": "Starting 5th January 2026 until 19th January 2026."
-      },
-      {
-        "id": "gen10",
-        "question": "When is the submission period for the Preliminary Round?",
-        "answer": "Starting 20th January 2026 until 28th February 2026."
+        "question": "When and where will the hackathon be held?",
+        "answer": "Details regarding dates, venue, and event format (physical, virtual, or hybrid) will be communicated on the official website and through registered participant channels."
       }
     ]
   },
@@ -64,36 +29,11 @@
       },
       {
         "id": "eli2",
-        "question": "I am not Malaysian but I am studying in Malaysia University, can I join?",
-        "answer": "Yes, as long as you are a student in Malaysia University regardless of Private or Public. You are eligible to join. To join any GDGoC MY, simply visit any of the GDGoC websites provided in the docs below and click the \"Join\" button. It's that easy! 😊🚀 GDGoC MY Chapters: https://docs.google.com/document/d/1E6cqIRpv7siZxsxqtSOWFowVRQaewPIkJiq6y1tyTVc/edit?usp=sharing"
-      },
-      {
-        "id": "eli3",
-        "question": "Are students from 42kl able to join KitaHack 2026?",
-        "answer": "Yes you can. As long as you are part of GDGoC MY Chapter and satisfy other criteria as per the rules and regulations, then you are eligible to join KitaHack 2026."
-      },
-      {
-        "id": "eli4",
-        "question": "\"At least 1 GDGoC Malaysia Chapter member\", my uni no longer has a GDGoC chapter. Do I have to find 1 teammate from unis like Monash or APU?",
-        "answer": "To join any GDGoC MY, simply visit any of the GDGoC websites provided in the docs below and click the \"Join\" button. It's that easy! 😊🚀 GDGoC MY Chapters: https://docs.google.com/document/d/1E6cqIRpv7siZxsxqtSOWFowVRQaewPIkJiq6y1tyTVc/edit?usp=sharing"
-      },
-      {
-        "id": "eli5",
-        "question": "If I am from Monash University Malaysia, would I be automatically considered a GDGoC Malaysia Chapter member?",
-        "answer": "Nope. To join any GDGoC MY, simply visit any of the GDGoC websites provided in the docs below and click the \"Join\" button. It's that easy! 😊🚀 GDGoC MY Chapters: https://docs.google.com/document/d/1E6cqIRpv7siZxsxqtSOWFowVRQaewPIkJiq6y1tyTVc/edit?usp=sharing"
-      },
-      {
-        "id": "eli6",
-        "question": "I have finished my course but haven't officially graduated, can I still join?",
-        "answer": "As long as your graduation is before the date of Preliminary Round Submission Deadline which is on 28th February 2026, it will be acceptable."
-      },
-      {
-        "id": "eli7",
         "question": "Do participants need prior hackathon or AI experience?",
         "answer": "No prior hackathon or advanced technical experience is required. The event is designed to accommodate participants of varying skill levels through guided workshops and mentorship."
       },
       {
-        "id": "eli8",
+        "id": "eli3",
         "question": "Is there an age limit for participation?",
         "answer": "Participants must meet the minimum age requirement as specified in the registration guidelines."
       }
@@ -116,74 +56,34 @@
         "id": "tea3",
         "question": "Can participants join the hackathon individually?",
         "answer": "Individual registrations are allowed; however, participants may be required to form or join a team before submission."
-      },
-      {
-        "id": "tea4",
-        "question": "Can I change from \"solo\" participation to \"team\" participation after submitting the registration form for KitaHack 2026?",
-        "answer": "The edit option for the KitaHack 2026 Registration Form is enabled. Feel free to change your registration from \"solo\" to \"team\" or \"team\" to \"solo\" anytime during the duration of Registration for KitaHack 2026. Once the Registration Period is complete, you will not have any option to change your team during submission unless you have the confirmation from the organisers."
-      },
-      {
-        "id": "tea5",
-        "question": "I can still modify my team members if I notify the organisers?",
-        "answer": "It depends on the case, it can be acceptable when your friend substitutes your current teammates. It is not acceptable for you as a solo team to quit for the purpose of substituting for another team. In any cases, do inform or consult the organisers if you wish to change or make modifications to your team. Changes will be only recorded when they get approval from the organisers."
       }
     ]
   },
   {
-    "category": "Problem Statement & Technology",
+    "category": "Hackathon Format",
     "items": [
       {
-        "id": "prob1",
+        "id": "for1",
         "question": "Does the hackathon provide a fixed case study or problem statement?",
         "answer": "No. GDGoC KitaHack 2026 follows an open-ended format. Teams are free to propose any project provided it aligns with the United Nations Sustainable Development Goals (SDGs) and meaningfully incorporates AI or Google technologies."
       },
       {
-        "id": "prob2",
+        "id": "for2",
         "question": "Why is an open-ended format used?",
         "answer": "This approach allows participants the flexibility to address real-world problems of their choice while gaining hands-on experience applying Google technologies, aligning with the objectives of the Google Solution Challenge."
-      },
+      }
+    ]
+  },
+  {
+    "category": "Technology & Resources",
+    "items": [
       {
-        "id": "prob3",
-        "question": "For AI can we use other AI like GROK, OpenAI APIs, DeepSeek?",
-        "answer": "As long as your submission fulfils the rules and regulations which are implementing AI to solve at least one of the SDG problems, your submission will be accepted. However, if the AI Technology isn't from Google, you will only score half of the total marks for the Implementing AI section. Ensure that your submission also must include at least one Google Technology outside of AI Technology (Google AI or others)."
-      },
-      {
-        "id": "prob4",
-        "question": "If my problem statement is able to relate to more SDG themes, does it mean more marks?",
-        "answer": "The focus is on how innovatively your solution incorporates AI to address SDG-related problems. More emphasis is placed on innovation, implementation, and the benefits of the solution rather than the number of SDG problems it tackles. Solutions that demonstrate a greater impact on the environment and/or human lives will have a higher chance of receiving better marks."
-      },
-      {
-        "id": "prob5",
-        "question": "If I use one of the Google AI Technology, but I do not incorporate any other Google Tech in my submission is it allowed?",
-        "answer": "Nope. You MUST use at least one Google Technology (Outside from Google AI Technology) in your submission even if you are incorporating Google AI Technology in your submission."
-      },
-      {
-        "id": "prob6",
-        "question": "Must it be google tech only or can combine?",
-        "answer": "Yes you can combine. But please ensure your submission have incorporated the use of at least one Google AI Technology and at least one Google Developer Tool."
-      },
-      {
-        "id": "prob7",
+        "id": "tech1",
         "question": "Are teams required to use specific technologies?",
         "answer": "Projects must meaningfully incorporate AI or Google technologies (e.g. Firebase, Flutter, Cloud Run, Vertex AI). The choice of tools should be appropriate to the problem being solved."
       },
       {
-        "id": "prob8",
-        "question": "Can I redeem credit from the organisers or do I get free credit for using Google AI Technology?",
-        "answer": "No, there is no redemption / reimbursement for the Google AI Technology credits. However, we strongly suggest you to use Google AI Studio instead of GCP Vertex AI as it is much cheaper."
-      },
-      {
-        "id": "prob9",
-        "question": "If I am using a low-code platform, but I can't integrate AI how will I be evaluated?",
-        "answer": "Your submission MUST include some kind of AI Technology be it in low code or functional prototype. For example, Flutter which is a low-code platform (using Dart programming) allows AI integration within its platform. Thus, even though you are using a low code platform, we require you to incorporate AI (i.e. calling of API) in some ways."
-      },
-      {
-        "id": "prob10",
-        "question": "If figma is a low code prototype, how are we supposed to implement the technology? or we only have to show that we do plan to implement it?",
-        "answer": "Figma is a low code prototype and allowed in submission. But unfortunately, Figma itself is not a Google Developer Tools unless integrated with various Google Services like Google Workspace to enhance workflow efficiency. So please ensure your submission integrate some kind of AI component (i.e. Gemini, Vertex AI) along with at least a Google Developer Tool for the preliminary round."
-      },
-      {
-        "id": "prob11",
+        "id": "tech2",
         "question": "Will workshops or mentoring be provided?",
         "answer": "Yes. Participants will receive structured guidance through a progressive workshop flow covering areas such as backend development, frontend development, AI, and cloud technologies."
       }
@@ -206,11 +106,6 @@
         "id": "sub3",
         "question": "Who will evaluate the projects?",
         "answer": "Projects will be evaluated by a panel of judges comprising industry professionals, technical experts, and academic representatives."
-      },
-      {
-        "id": "sub4",
-        "question": "If my video presentation is more than 5 minutes, what will happen?",
-        "answer": "Every time you exceed 30 seconds, 1 mark will be reducted."
       }
     ]
   },
