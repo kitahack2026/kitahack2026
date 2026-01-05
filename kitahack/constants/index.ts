@@ -47,8 +47,8 @@ export const NAV_ITEMS = [
 
 // Social Media Links
 export const SOCIAL_LINKS = {
-    LINKEDIN: 'https://www.linkedin.com/company/gdgc-malaysia',
-    INSTAGRAM: 'https://www.instagram.com/gdgc_malaysia',
-    EMAIL: 'mailto:sea.dscmalaysia@gmail.com',
+    LINKEDIN: 'https://www.linkedin.com/company/dsc-malaysia/',
+    INSTAGRAM: 'https://www.instagram.com/kitahack.my/',
+    EMAIL: 'mailto:issye03@gmail.com',
 } as const;
 
