@@ -24,14 +24,14 @@ const colors = {
 const events: TimelineEvent[] = [
     {
         title: 'Info Session',
-        date: '9th Jan 2026',
+        date: '5th Jan 2026',
         type: 'Kickoff',
         color: colors.blue,
         details: 'Kickstart the journey! Discover the problem statements and get excited for what’s ahead.',
     },
     {
         title: 'Registration Opens',
-        date: '9th-18th Jan',
+        date: '5th-18th Jan 2026',
         type: 'Launch',
         color: colors.yellow,
         details: 'Reserve your spot early and secure your place in the challenge!',
@@ -45,21 +45,21 @@ const events: TimelineEvent[] = [
     },
     {
         title: 'Workshop 2: Quote It Up ! Your First Android App with API Calls',
-        date: 'February 1st',
+        date: '1st Feb 2026',
         type: 'Workshop',
         color: colors.green,
         details: 'Build your first Android app with live API integration in this interactive session.',
     },
     {
         title: 'Workshop 3: Building Full Stack Web Applications with Firebase',
-        date: 'February 7th',
+        date: '7th Feb 2026',
         type: 'Workshop',
         color: colors.green,
         details: "A hands-on workshop covering the fundamentals of building full-stack web applications with Firebase. Participants will explore authentication, databases, and deployment workflows commonly used in production-ready apps."
     },
     {
         title: 'Workshop 4: Frontend Development with Flutter',
-        date: 'February 8th ',
+        date: '8th Feb 2026',
         type: 'Workshop',
         color: colors.green,
         details: 'Hands-on Flutter workshop to level up your frontend development skills for mobile apps.',
@@ -73,7 +73,7 @@ const events: TimelineEvent[] = [
     },
     {
         title: 'Workshop 6: Cloud Computing Masterclass with GCP',
-        date: 'February 15th',
+        date: '15th Feb 2026',
         type: 'Workshop',
         color: colors.green,
         details: "An immersive masterclass introducing core cloud computing concepts using Google Cloud Platform. Attendees will gain practical insights into cloud services, architecture, and real-world use cases.",
@@ -94,7 +94,7 @@ const events: TimelineEvent[] = [
     },
     {
         title: 'Evaluation Period',
-        date: '1st-7th Mar',
+        date: '1st-7th Mar 2026',
         type: 'Judging',
         color: colors.blue,
         details: 'Our panel of industry experts will review all submissions.',
@@ -109,7 +109,7 @@ const events: TimelineEvent[] = [
     },
     {
         title: 'Mentoring Session',
-        date: '10th-17th Mar',
+        date: '10th-17th Mar 2026',
         type: 'Mentorship',
         color: colors.blue,
         details: 'Sessions with experts to polish your final product.',
