@@ -31,34 +31,27 @@ const JUDGING_STEPS = [
     },
 ];
 
-// --- JUDGING CRITERIA DATA ---
+// --- JUDGING CRITERIA DATA (Final Round) ---
 const JUDGING_CRITERIA = [
     {
-        name: 'Innovation & Creativity',
-        weight: 30,
+        name: 'Innovation & Impact',
+        weight: 20,
         description:
-            'Originality of the idea and creative application of technology.',
-        color: COLORS.PRIMARY.YELLOW,
-    },
-    {
-        name: 'Technical Implementation',
-        weight: 30,
-        description:
-            'Quality of code, robustness, and effective use of Google technologies.',
+            'How well the solution addresses real-world problems and its potential impact on addressing SDG-related challenges.',
         color: COLORS.PRIMARY.BLUE,
     },
     {
-        name: 'Impact & SDG Alignment',
-        weight: 20,
+        name: 'Presentation',
+        weight: 40,
         description:
-            'Potential for real-world impact and alignment with UN SDGs.',
+            'Quality of the live presentation, clarity of communication, ability to demonstrate the solution effectively, and engagement with the judging panel.',
         color: COLORS.PRIMARY.GREEN,
     },
     {
-        name: 'User Experience & Design',
-        weight: 20,
+        name: 'Technical',
+        weight: 40,
         description:
-            'Intuitive interface, ease of use, and overall aesthetic appeal.',
+            'Technical depth, code quality, architecture, effective use of AI and Google technologies, and robustness of the implementation.',
         color: COLORS.PRIMARY.RED,
     },
 ];
@@ -126,10 +119,10 @@ export default function JudgingSection() {
                 {/* Judging Criteria */}
                 <div className='bg-kitahack-bg-card border border-white/10 rounded-2xl p-6 md:p-8 shadow-xl'>
                     <h3 className='text-2xl md:text-3xl font-bold text-white mb-6 text-center lg:text-left'>
-                        Evaluation Criteria
+                        Final Round Evaluation Criteria
                     </h3>
                     <p className='text-sm md:text-base text-gray-400 mb-8 leading-relaxed'>
-                        Projects are evaluated across key dimensions to ensure
+                        Final round projects are evaluated across key dimensions to ensure
                         fairness and recognize excellence.
                     </p>
 
