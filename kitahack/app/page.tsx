@@ -7,6 +7,7 @@ import FAQSection from './components/FAQ/FAQSection';
 import Sponsors from './components/Partners/Sponsors';
 import Organizers from './components/Partners/Organizers';
 import Footer from './components/Footer/Footer';
+import RegisterFloatingButton from './components/RegisterFloatingButton';
 
 /**
  * Home Page - KitaHack 2026 Landing Page
@@ -28,6 +29,7 @@ export default function Home() {
             <Sponsors />
             <Organizers />
             <Footer />
+            <RegisterFloatingButton/>
         </main>
     );
 }
