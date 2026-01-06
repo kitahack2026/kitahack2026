@@ -13,7 +13,7 @@ export default function AboutSection() {
     return (
         <SectionWrapper
             id='about'
-            className='relative min-h-screen overflow-hidden'
+            className='relative w-full min-h-screen'
             ariaLabelledby='about-heading'
         >
             {/* Background with gradient */}

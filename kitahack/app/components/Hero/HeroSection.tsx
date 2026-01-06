@@ -27,7 +27,7 @@ export default function HeroSection() {
     };
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center px-4 py-16 md:py-12 pt-24 md:pt-32 overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center px-4 py-16 md:py-12 pt-24 md:pt-32">
             {/* Background with gradient */}
             <div className='absolute inset-0 bg-kitahack-gradient' />
 
