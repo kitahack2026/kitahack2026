@@ -19,36 +19,31 @@
       },
       {
         "id": "gen4",
-        "question": "When will the Google Solution Challenge 2026?",
-        "answer": "The expectation for the Google Solution Challenge 2026 is to be after May. For more details, we have to wait for Google's Global Team to announce it."
+        "question": "So which round must we show up physically?",
+        "answer": "All preliminary rounds will be held virtually. Only Pre-Demo Day and Demo Day will be held physically for Top 10 Finalists."
       },
       {
         "id": "gen5",
-        "question": "So which round must we show up physically?",
-        "answer": "All preliminary rounds will be held virtually. Only Demo Day will be held physically for Top 10 Finalists."
-      },
-      {
-        "id": "gen6",
         "question": "Is there a registration fee?",
         "answer": "There is no registration fee."
       },
       {
-        "id": "gen7",
+        "id": "gen6",
         "question": "I am staying in KL. Can I go to APU/Monash for the physical workshop?",
-        "answer": "Nope. The workshops are only open physically for the Host Universities. External students that are interested will be able to join the workshop Virtually."
+        "answer": "Physical attendance depends on the Host University. Please stay tuned for our upcoming announcements about specific workshop details."
       },
       {
-        "id": "gen8",
+        "id": "gen7",
         "question": "Can I know who are the speakers for all the workshops?",
         "answer": "The speakers of the workshops are GDE's, DevFest Speakers or Experienced Developers. We will announce the speaker info when the posts for the workshops are up!"
       },
       {
-        "id": "gen9",
+        "id": "gen8",
         "question": "When is the deadline for the Registration Form?",
         "answer": "Starting 5th January 2026 until 19th January 2026."
       },
       {
-        "id": "gen10",
+        "id": "gen9",
         "question": "When is the submission period for the Preliminary Round?",
         "answer": "Starting 20th January 2026 until 28th February 2026."
       }
