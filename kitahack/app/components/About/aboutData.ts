@@ -19,7 +19,7 @@ export const aboutData: AboutCardData[] = [
         id: 2,
         title: "Building Community",
         description: "KitaHack aims to build a supportive community for students to exchange ideas, gain practical experience, and create impactful solutions using Google technologies. The event also encourages students to join the Google Developer Groups on Campus (GDGoC) Solution Challenge, where participants worldwide are invited to solve one of the United Nations Sustainable Development Goals (UN SDGs) using Google tools.",
-        imagePath: "/about-community.jpg",
+        imagePath: "/about-community-v2.jpg",
         imageAlt: "Students collaborating on Google technologies",
         gradientFrom: "#CB5C6D", // Red
         gradientTo: "#D1AC34",   // Orange
