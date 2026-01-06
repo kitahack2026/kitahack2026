@@ -25,7 +25,7 @@ export default function CategoryItem({
             aria-selected={isActive}
             tabIndex={isActive ? 0 : -1}
             className={`
-                px-5 py-3 rounded-xl text-sm font-medium text-left whitespace-nowrap
+                px-5 py-3 rounded-xl text-sm font-medium text-left w-full
                 ${animation.transition.default}
                 ${animation.focus.visible}
                 ${
