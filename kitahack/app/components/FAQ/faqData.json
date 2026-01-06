@@ -40,7 +40,7 @@
       {
         "id": "gen8",
         "question": "When is the deadline for the Registration Form?",
-        "answer": "Starting 5th January 2026 until 19th January 2026."
+        "answer": "Starting 5th January 2026 until 15th January 2026."
       },
       {
         "id": "gen9",
@@ -130,7 +130,7 @@
       {
         "id": "prob1",
         "question": "Does the hackathon provide a fixed case study or problem statement?",
-        "answer": "No. GDGoC KitaHack 2026 follows an open-ended format. Teams are free to propose any project provided it aligns with the United Nations Sustainable Development Goals (SDGs) and meaningfully incorporates AI or Google technologies."
+        "answer": "No. GDGoC KitaHack 2026 follows an open-ended format. Teams are free to propose any project provided it aligns with the United Nations Sustainable Development Goals (SDGs) and meaningfully incorporates AI or Google Technologies."
       },
       {
         "id": "prob2",
@@ -245,7 +245,7 @@
       {
         "id": "sup1",
         "question": "How can participants seek assistance during the hackathon?",
-        "answer": "Support channels and contact details will be provided to registered participants prior to the event."
+        "answer": "Join our Discord server for support and updates: https://discord.gg/4pjQFQfx"
       }
     ]
   }
