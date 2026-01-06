@@ -172,7 +172,7 @@ export default function TechnologiesSection() {
             >
                 <SectionHeading>Google Technologies</SectionHeading>
                 <p
-                    className={`${typography.description} text-center mt-6 px-2 md:px-4`}
+                    className={`${typography.description} text-center mt-6 mb-12 px-2 md:px-4`}
                 >
                     Explore the core Google ecosystem driving mobile, web,
                     cloud, and AI innovation.
@@ -224,7 +224,7 @@ export default function TechnologiesSection() {
                             >
                                 <Button
                                     type='button'
-                                    className={`bg-blue-600 hover:bg-blue-500 text-white px-6 sm:px-10 py-2 sm:py-3 rounded-full font-bold ${animations.transition.default} ${animations.hover.scale} shadow-lg shadow-blue-900/50 text-sm sm:text-base whitespace-nowrap ${animations.focus.ringThin}`}
+                                    className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl'
                                 >
                                     Learn More
                                 </Button>
@@ -320,7 +320,7 @@ export default function TechnologiesSection() {
                             >
                                 <Button
                                     type='button'
-                                    className={`bg-blue-600 hover:bg-blue-500 text-white px-6 lg:px-8 xl:px-10 py-2 lg:py-3 rounded-full font-bold ${animations.transition.default} ${animations.hover.scale} shadow-lg shadow-blue-900/50 text-xs lg:text-sm xl:text-base whitespace-nowrap ${animations.focus.ringThin}`}
+                                    className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 lg:px-8 xl:px-10 py-3 lg:py-4 text-xs lg:text-sm xl:text-base rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl whitespace-nowrap'
                                 >
                                     Learn More
                                 </Button>
