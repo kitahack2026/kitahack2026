@@ -5,7 +5,7 @@
 
 // Event Dates
 export const EVENT_DATES = {
-    REGISTRATION_CLOSES: new Date('2026-01-18T23:59:59+08:00'),
+    REGISTRATION_CLOSES: new Date('2026-01-15T23:59:59+08:00'),
 } as const;
 
 // External URLs
