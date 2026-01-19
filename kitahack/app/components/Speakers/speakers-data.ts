@@ -23,7 +23,7 @@ export const speakers: Speaker[] = [
         image: "/speakers/Raziq-Din.png"
     },
     {
-        name: "Vrijraj",
+        name: "Vrijraj Singh",
         title: "CTO & Google Developers Expert",
         company: "Google Developers",
         workshop: "Building Scalable Web Apps with Firebase",
@@ -38,7 +38,7 @@ export const speakers: Speaker[] = [
         image: "/speakers/Salman-Firdaus.png"
     },
     {
-        name: "Cheng Kar Meng (William)",
+        name: "Cheng Kar Meng",
         title: "AI & Cloud Innovator",
         workshop: "Turning AI & Cloud Ideas into Real-World Impact",
         bio: "Cheng Kar Meng (William) works at the intersection of AI, Cloud development, and Data Analytics to turn complex ideas into measurable impact. From winning hackathons to leading student organizations, he specializes in building ground-up solutions for real-world problems. A firm believer in growth through persistence, William spends his off-hours bouldering, reminding himself that progress comes from showing up and pushing past hurdles, one hold at a time.",
