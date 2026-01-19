@@ -49,6 +49,7 @@ export const speakers: Speaker[] = [
         title: "KitaHack 2025 Champion",
         company: "University of Malaya",
         workshop: "From Zero to Hero: KitaHack 2025 Champions",
-        bio: "Rexton is a second-year Computer Science (AI) student at University of Malaya and the winner of KitaHack 2025. He has built an impressive track record across entrepreneurship, data analytics, and community leadership. From heading sponsorship operations at UM Startup Community to leading multimedia initiatives, he brings a unique perspective on how technology intersects with storytelling and business strategy. As a KitaHack champion, he understands what it takes to build winning solutions under pressure and turn ambitious ideas into executable realities."
+        bio: "Rexton is a third-year Computer Science (AI) student at University of Malaya and the winner of KitaHack 2025. He has built an impressive track record across entrepreneurship, data analytics, and community leadership. From heading sponsorship operations at UM Startup Community to leading multimedia initiatives, he brings a unique perspective on how technology intersects with storytelling and business strategy. As a KitaHack champion, he understands what it takes to build winning solutions under pressure and turn ambitious ideas into executable realities.",
+        image: "/speakers/Ooi-Rui-Zhe.jpg"
     }
 ];
