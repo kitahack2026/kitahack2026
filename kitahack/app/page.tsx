@@ -4,6 +4,7 @@ import Timeline from './components/Timeline';
 import TechnologiesSection from './components/TechnologiesSection';
 import JudgingSection from './components/Judging/JudgingSection';
 import FAQSection from './components/FAQ/FAQSection';
+import CallingForSponsors from './components/Partners/CallingForSponsors';
 import Sponsors from './components/Partners/Sponsors';
 import Organizers from './components/Partners/Organizers';
 import Footer from './components/Footer/Footer';
@@ -26,6 +27,7 @@ export default function Home() {
             </section>
             <JudgingSection />
             <FAQSection />
+            <CallingForSponsors />
             <Sponsors />
             <Organizers />
             <Footer />
