@@ -2,12 +2,12 @@ import CustomMarquee from './CustomMarquee';
 
 // next is not sponsoring lol, just a placeholder logo for now
 const sponsors = [
-    { name: 'next', logo: 'next.svg', page: 'https://nextjs.org/' },
-    { name: 'next', logo: 'next.svg', page: 'https://nextjs.org/' },
-    { name: 'next', logo: 'next.svg', page: 'https://nextjs.org/' },
-    { name: 'next', logo: 'next.svg', page: 'https://nextjs.org/' },
-    { name: 'next', logo: 'next.svg', page: 'https://nextjs.org/' },
-    { name: 'next', logo: 'next.svg', page: 'https://nextjs.org/' },
+    { name: 'Xenber', logo: 'xenber.svg', page: 'https://xenber.com/' },
+    { name: 'Xenber', logo: 'xenber.svg', page: 'https://xenber.com/' },
+    { name: 'Xenber', logo: 'xenber.svg', page: 'https://xenber.com/' },
+    { name: 'Xenber', logo: 'xenber.svg', page: 'https://xenber.com/' },
+    { name: 'Xenber', logo: 'xenber.svg', page: 'https://xenber.com/' },
+    { name: 'Xenber', logo: 'xenber.svg', page: 'https://xenber.com/' },
 ];
 
 import { SectionWrapper } from '@/components/ui/section-wrapper';
@@ -130,10 +130,11 @@ function Sponsors() {
             reverse={false}
             partnerList={sponsors}
             duration={30}
+            itemPadding={6}
         />
     );
 }
 
 // change below line to export Sponsors when we found sponsors
 // else just leave it as CallingForSponsors
-export default CallingForSponsors;
+export default Sponsors;

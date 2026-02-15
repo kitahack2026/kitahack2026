@@ -19,6 +19,7 @@ interface CustomMarqueeProps {
     partnerList: Partner[];
     duration: number;
     lightTheme?: boolean;
+    itemPadding?: number;
 }
 
 export default function CustomMarquee({
@@ -28,6 +29,7 @@ export default function CustomMarquee({
     partnerList,
     duration,
     lightTheme = false,
+    itemPadding = 0
 }: CustomMarqueeProps) {
     const sliderClassName = lightTheme
         ? 'bg-[#f5f5f5] border border-gray-300/50 py-5 mx-1 md:mx-2 lg:mx-3 xl:mx-4 2xl:mx-6 rounded-2xl'
@@ -51,7 +53,7 @@ export default function CustomMarquee({
                             href={partner.page}
                             target='_blank'
                             rel='noopener noreferrer'
-                            className={`block ${lightTheme ? 'opacity-80 hover:opacity-100' : 'grayscale-10 opacity-70 hover:grayscale-0 hover:opacity-100'} ${animations.transition.default} ${animations.hover.scale} ${animations.focus.ringThin}`}
+                            className={`px-${itemPadding} block ${lightTheme ? 'opacity-80 hover:opacity-100' : 'grayscale-10 opacity-70 hover:grayscale-0 hover:opacity-100'} ${animations.transition.default} ${animations.hover.scale} ${animations.focus.ringThin}`}
                             aria-label={`Visit ${partner.name} website`}
                         >
                             <Logo
