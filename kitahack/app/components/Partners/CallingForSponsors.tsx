@@ -7,7 +7,7 @@ const contacts = [
     {
         name: 'Fong Jia Xin',
         email: 'jxfong357@gmail.com',
-        phone: '010-3013940',
+        phone: '016-8061017',
         role: 'Co-Director KitaHack 2026'
     },
     {
